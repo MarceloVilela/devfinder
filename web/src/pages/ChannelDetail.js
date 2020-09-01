@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-
 import { FaYoutube, FaGithub } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import api from '../services/api'
 import { Header, Container } from '../components'
@@ -24,12 +24,16 @@ export default function Main({ match }) {
           }
         })
 
-        const findById = response.data.find(item => item._id === match.params.id)
+        const { id } = match.params;
+        const channelName = id.toLocaleLowerCase();
+
+        const findById = response.data.find(item => item.name.toLocaleLowerCase() === channelName)
         if (!findById) {
+          toast.error(`Ops! canal ${id} não encontrado.`);
           history.push('/channel');
         }
 
-        const [data] = response.data.filter(item => item._id === match.params.id)
+        const [data] = response.data.filter(item => item.name.toLocaleLowerCase() === channelName)
         console.log(match.params.id, data, response.data)
 
         setchannel(data)
@@ -41,7 +45,7 @@ export default function Main({ match }) {
 
     }
     loadchannels()
-  }, [history, match.params.id])
+  }, [history, match.params])
 
   return (
     <>
@@ -83,6 +87,7 @@ export default function Main({ match }) {
                       >
                         <FaYoutube color="#ff0000" />
                       </a>
+                      {channel.userGithub &&
                       <a
                         href={`https://github.com/${channel.userGithub}`}
                         target="_blank"
@@ -90,6 +95,7 @@ export default function Main({ match }) {
                       >
                         <FaGithub color="#fff" />
                       </a>
+                      }
                     </div>
                   </aside>
                 </li>
