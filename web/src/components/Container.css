@@ -3,6 +3,9 @@ main.container {
   margin: 0 auto;
   padding: 50px 0;
   text-align: center;
+
+  /* header fixed */
+  padding-top: 140px;
 }
 
 @media screen and (max-width: 1024px) {

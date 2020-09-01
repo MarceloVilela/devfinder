@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdSyncDisabled, MdStarBorder } from 'react-icons/md'
+import { toast } from 'react-toastify'
 
 import api from '../services/api'
 import { Header, Container } from '../components'
@@ -14,7 +15,7 @@ export default function Main({ match }) {
     async function loadUsers() {
       try {
         setloading(true)
-        
+
         const { data } = await api.get('/devs', {
           headers: {
             user: loggedUserId
@@ -32,6 +33,11 @@ export default function Main({ match }) {
   }, [loggedUserId])
 
   async function handleDislike(username) {
+    if (!loggedUserId) {
+      toast.error('Acessando como visitante, não é possível desabilitar.');
+      return;
+    }
+
     await api.post(`/devs/${username}/dislikes`, null, {
       headers: { user: loggedUserId }
     })
@@ -39,6 +45,12 @@ export default function Main({ match }) {
   }
 
   async function handleLike(username) {
+    alert(loggedUserId);
+    if (!loggedUserId) {
+      toast.error('Acessando como visitante, não é possível favoritar.');
+      return;
+    }
+
     await api.post(`/devs/${username}/likes`, null, {
       headers: { user: loggedUserId }
     })
