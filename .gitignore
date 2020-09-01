@@ -1,0 +1,18 @@
+# PACKAGES
+
+/**/node_modules
+/**/yarn.lock
+
+# ENVIRONMENT
+
+/**/.env
+
+# TMP
+
+/**//tmp
+
+# ZIPPED (ASSETS)
+
+/**/*.zip
+
+mobile
