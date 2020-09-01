@@ -101,7 +101,7 @@ export default function Main({ match }) {
             {(channelsFiltered.length > 0) && (
               <ul className='channels list-flex-row'>
                 {channelsFiltered.map((item) => (
-                  <Link to={`/channel/${item._id}`} key={item._id}>
+                  <Link to={`/channel/${item.name}`} key={item._id}>
                     <li>
                       <div className="avatar">
                         <img
