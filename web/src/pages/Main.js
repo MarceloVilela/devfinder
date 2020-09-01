@@ -1,76 +1,70 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
+
 import api from '../services/api'
+import subsPlaceHolder from '../assets/subs.json'
+import Thumbnail from '../assets/thumbnail.jpg'
+import { Header, Container } from '../components'
 import './Main.css'
 
-import dislike from '../assets/dislike.svg'
-import like from '../assets/like.svg'
-import logo from '../assets/logo.svg'
-
 export default function Main({ match }) {
-    const [users, setUsers] = useState([])
+  const [subs, setSubs] = useState([])
+  const [loading, setloading] = useState(false)
+  const loggedUserId = localStorage.getItem('@DevFinder:user')
 
-    useEffect(() => {
-        async function loadUsers() {
-            const response = await api.get('/devs', {
-                headers: {
-                    user: match.params.id
-                }
-            })
-            setUsers(response.data)
-        }
-        loadUsers()
-    }, [match.params.id])
+  useEffect(() => {
+    async function loadUsers() {
+      try {
+        setloading(true)
 
-    async function handleDislike(id) {
-        await api.post(`/devs/${id}/dislikes`, null, {
-            headers: { user: match.params.id }
+        await api.get('/devs', {
+          headers: {
+            user: loggedUserId
+          }
         })
-        setUsers(users.filter(user => user._id !== id))
+        setSubs(subsPlaceHolder.filter(item => !item.channel.includes('Zurubabel')))
+      } catch (error) {
+      } finally {
+        setloading(false)
+      }
     }
+    loadUsers()
+  }, [loggedUserId])
 
-    async function handleLike(id) {
-        await api.post(`/devs/${id}/likes`, null, {
-            headers: { user: match.params.id }
-        })
-        setUsers(users.filter(user => user._id !== id))
-    }
+  return (
+    <>
+      <Header />
 
-    return (
-        <div className='main-container'>
-            <Link to='/'>
-                <img src={logo} alt='Tindev' />
-            </Link>
+      <Container loading={loading} className="container-full-width">
+        {subs.length > 0 ? (
+          <ul className="subs list-flex-column">
+            {subs.map((item) => (
+              <li key={item.title}>
+                <div className="thumb">
+                  <img
+                    src={Thumbnail}
+                    alt={item.title}
+                  />
+                </div>
 
-            {users.length > 0 ? (
-                <ul>
-                    {users.map((user) => (
-                        <li key={user._id}>
-                            <div>
-                              <img src={user.avatar} alt={user.name} />
-                            </div>
-                            
-                            <footer>
-                                <div className='bio'>
-                                  <strong>{user.name}</strong>
-                                  <p>{user.bio}</p>
-                                </div>
+                <footer className='container-edge-spacing'>
+                  <div className='avatar'>
+                    <img
+                      src={'https://yt3.ggpht.com/a/AATXAJzF6fuUyEFRBtZSpScb9M-Dq4QI6pyv0ic3pw=s100-c-k-c0xffffffff-no-rj-mo'}
+                      alt={item.title}
+                    />
+                  </div>
 
-                                <div className='buttons'>
-                                  <button type='button' onClick={() => handleDislike(user._id)}>
-                                      <img src={dislike} alt='Dislike' />
-                                  </button>
-                                  <button type='button' onClick={() => handleLike(user._id)}>
-                                      <img src={like} alt='Like' />
-                                  </button>
-                                </div>
+                  <div className='bio'>
+                    <strong>{item.title}</strong>
+                    <small>{item.channel}</small>
+                  </div>
+                </footer>
 
-                            </footer>
-
-                        </li>
-                    ))}
-                </ul>
-            ) : <div className="empty">Acabou :(</div> }
-        </div>
-    )
+              </li>
+            ))}
+          </ul>
+        ) : <div className="empty">Acabou :(</div>}
+      </Container>
+    </>
+  )
 }

@@ -1,43 +1,43 @@
-const axios = require('axios')
+const {Query} = require('mongoose')
+const { validate: isUuid } = require('uuid');
+
 const Dev = require('../models/Dev')
+const createDevService = require('../services/CreateDev')
 
 module.exports = {
-  async index(req,res) {
-    const {user} = req.headers
-    
-    const loggedDev = await Dev.findById(user)
-    
-    const users = await Dev.find({
-      $and: [
-        {_id: {$ne: user}},
-        {_id: {$nin: loggedDev.likes}},
-        {_id: {$nin: loggedDev.deslikes}},
-      ],
-    })
-    
-    return res.json(users)
-  },
-  
-  async store(req, res) {
-    const {username} = req.body
-    
-    const userExists = await Dev.findOne({user: username})
-    
-    if(userExists){
-       return res.json(userExists)
+  async index(req, res) {
+    const { user } = req.headers
+
+    let devs = [];
+
+    if (isUuid(user)) {
+      const loggedDev = await Dev.findById(user)
+      //return res.json(loggedDev)
+
+      if (!loggedDev) {
+        throw new Error(`user ${user} not found`)
+      }
+
+      devs = await Dev.find({
+        $and: [
+          { _id: { $ne: user } },
+          { _id: { $nin: loggedDev.likes } },
+          { _id: { $nin: loggedDev.deslikes } },
+        ],
+      })
     }
-    
-    const response = await axios.get(`https://api.github.com/users/${username}`)
-    
-    const { name, bio, avatar_url: avatar } = response.data
-    
-    const dev = await Dev.create({
-      name,
-      user: username,
-      bio,
-      avatar
-    })
-    
+    else {
+      devs = await Dev.find()
+    }
+
+    return res.json(devs)
+  },
+
+  async store(req, res) {
+    const { username: user } = req.body
+
+    const dev = await createDevService({ user })
+
     return res.json(dev)
   }
 }

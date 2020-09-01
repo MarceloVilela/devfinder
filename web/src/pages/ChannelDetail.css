@@ -1,0 +1,64 @@
+.about {
+  background-color: #3d3451;
+  border: 1px solid #3d3451;
+  border-radius: 15px;
+}
+
+.about li {
+  display: flex;
+}
+
+.about .avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about .avatar img {
+  width: 100px;
+  border-radius: 50px;
+  margin-left: 20px;
+}
+
+.about h3 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #eee;
+}
+
+.about aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  justify-content: center;
+  /*background-color: #3d3451;
+    border: 1px solid #3d3451;*/
+  padding: 15px 20px;
+  text-align: left;
+  border-radius: 0 0 5px 5px;
+}
+
+.about aside > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.about aside strong {
+  font-size: 16px;
+  color: #eee;
+}
+
+.about aside p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #c1bec7;
+  width: 100%;;
+}
+
+.about aside svg {
+  font-size: 32px;
+  margin-left: 32px;
+}

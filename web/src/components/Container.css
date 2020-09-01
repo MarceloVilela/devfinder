@@ -1,0 +1,37 @@
+main.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 50px 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  main.container { 
+    padding: 40px 22px;
+    /* header fixed */
+    padding-top: 140px; 
+  }
+
+
+  .break-row {
+    /*border: 1px solid black;*/
+    flex-wrap: wrap;
+  }
+
+  .break-row > * {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+}
+
+main.container > article {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+main.container > article img {
+  width: 64px;
+  height: 64px;
+}

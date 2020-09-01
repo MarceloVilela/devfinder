@@ -1,0 +1,85 @@
+/* header fixed */
+header {
+  position: fixed;
+  margin-top: -22px;
+  padding-bottom: 22px;
+  top: 0;
+  width: 100%;
+
+  background: #27242f;
+  z-index: 9;
+}
+
+header section {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 50px 0;
+  text-align: center;
+  display: flex;
+  align-content: space-between;
+  padding-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  header section {
+    padding: 50px 22px 0 22px
+  }
+}
+
+header section>a {
+  display: flex;
+  flex: 5;
+}
+
+header section nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header section nav a {
+  text-decoration: none;
+  color: #ccc;
+  margin-left: 16px;
+}
+
+header section nav svg {
+  font-size: 24px;
+}
+
+.logo {
+  font-family: 'Grenze Gotisch', cursive;
+  font-size: 2.5em;
+  text-align: center;
+  /* https://www.flaticon.com/br/buscar?word=like */
+  /* https://www.w3schools.com/colors/colors_mixer.asp?colorbottom=8A2BE2&colortop=FFFFFF */
+  /*primary*/
+  color: #9373d8;
+  color: #8e6fd0;
+  color: #886bc7;
+  color: #8367bf;
+  /*primary-strong*/
+  color: #7d63b6;
+  color: #785fae;
+  color: #735ba5;
+  color: #6d579d;
+  /*primary-stronger*/
+  color: #685394;
+  color: #624f8c;
+  color: #5d4c84;
+  color: #58487b;
+  /*background-weakerer*/
+  color: #524473;
+  color: #4d406a;
+  color: #473c62;
+  color: #423859;
+  /*background-weak*/
+  color: #3d3451;
+  color: #373048;
+  color: #322c40;
+  color: #2c2837;
+  /*background*/
+  color: #27242f;
+  color: #9373d8;
+}
