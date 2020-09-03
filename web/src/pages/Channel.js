@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { Link, } from 'react-router-dom'
 import { FaGithub } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import api from '../services/api'
 import { Header, Container, IconCategory } from '../components'
@@ -17,14 +18,10 @@ export default function Main({ match }) {
       try {
         setloading(true)
 
-        const response = await api.get('/channels', {
-          headers: {
-            user: undefined
-          }
-        })
+        const response = await api.get('/channels')
         setchannels(response.data)
       } catch (error) {
-
+        toast.error('Erro ao listar canais')
       } finally {
         setloading(false)
       }

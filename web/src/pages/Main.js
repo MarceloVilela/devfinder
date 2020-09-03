@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import api from '../services/api'
+import { Header, Container } from '../components'
 import subsPlaceHolder from '../assets/subs.json'
 import Thumbnail from '../assets/thumbnail.jpg'
-import { Header, Container } from '../components'
 import './Main.css'
 
 export default function Main({ match }) {
   const [subs, setSubs] = useState([])
   const [loading, setloading] = useState(false)
-  const loggedUserId = localStorage.getItem('@DevFinder:user')
 
   useEffect(() => {
     async function loadUsers() {
       try {
         setloading(true)
 
-        await api.get('/devs', {
-          headers: {
-            user: loggedUserId
-          }
-        })
+        await api.get('/devs')
+        
         setSubs(subsPlaceHolder.filter(item => !item.channel.includes('Zurubabel')))
       } catch (error) {
+        toast.error('Erro ao listar feed')
       } finally {
         setloading(false)
       }
     }
     loadUsers()
-  }, [loggedUserId])
+  }, [])
 
   return (
     <>

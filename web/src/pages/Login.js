@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
+import { useAuth } from '../hooks/auth';
 import './Login.css'
 
 export default function Login({ history }) {
   const location = useLocation();
+  const { socialAuthCallback, signOut } = useAuth();
 
   useEffect(() => {
-    localStorage.removeItem('@DevFinder:user');
-  }, [])
+    signOut();
+  }, [signOut])
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const userId = queryParams.get('id')
 
     if (userId) {
-      console.log(`login-queryParam.id-${userId}`)
-      localStorage.setItem('@DevFinder:user', userId)
+      socialAuthCallback({ id: userId });
       history.push('main')
     }
-  }, [history, location.search])
+  }, [history, location.search, socialAuthCallback])
 
   return (
     <div className='login-container'>

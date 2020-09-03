@@ -3,57 +3,50 @@ import { MdSyncDisabled, MdStarBorder } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
 import api from '../services/api'
+import { useAuth } from '../hooks/auth'
 import { Header, Container } from '../components'
 import './User.css'
 
 export default function Main({ match }) {
+  const { user } = useAuth();
   const [users, setUsers] = useState([])
   const [loading, setloading] = useState(false)
-  const loggedUserId = localStorage.getItem('@DevFinder:user')
 
   useEffect(() => {
     async function loadUsers() {
       try {
         setloading(true)
 
-        const { data } = await api.get('/devs', {
-          headers: {
-            user: loggedUserId
-          }
-        })
+        const { data } = await api.get('/devs')
 
         console.log(data)
         setUsers(data)
       } catch (error) {
+        toast.error('Erro ao listar devs')
       } finally {
         setloading(false)
       }
     }
     loadUsers()
-  }, [loggedUserId])
+  }, [])
 
   async function handleDislike(username) {
-    if (!loggedUserId) {
+    if (!user) {
       toast.error('Acessando como visitante, não é possível desabilitar.');
       return;
     }
 
-    await api.post(`/devs/${username}/dislikes`, null, {
-      headers: { user: loggedUserId }
-    })
+    await api.post(`/devs/${username}/dislikes`)
     setUsers(users.filter(user => user.user !== username))
   }
 
   async function handleLike(username) {
-    alert(loggedUserId);
-    if (!loggedUserId) {
+    if (!user) {
       toast.error('Acessando como visitante, não é possível favoritar.');
       return;
     }
 
-    await api.post(`/devs/${username}/likes`, null, {
-      headers: { user: loggedUserId }
-    })
+    await api.post(`/devs/${username}/likes`)
     setUsers(users.filter(user => user.user !== username))
   }
 
