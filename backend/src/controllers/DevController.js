@@ -6,13 +6,13 @@ const createDevService = require('../services/CreateDev')
 
 module.exports = {
   async index(req, res) {
-    const { user } = req.headers
+    const { authorization: user } = req.headers
 
     let devs = [];
 
     if (isUuid(user)) {
       const loggedDev = await Dev.findById(user)
-      //return res.json(loggedDev)
+      console.log('usuario logado: ', loggedDev);
 
       if (!loggedDev) {
         throw new Error(`user ${user} not found`)

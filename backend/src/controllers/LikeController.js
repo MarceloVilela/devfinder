@@ -2,7 +2,7 @@ const Dev = require('../models/Dev')
 
 module.exports = {
   async store(req, res) {
-    const { user } = req.headers
+    const { authorization: user } = req.headers
     const { username } = req.params
 
     const loggedDev = await Dev.findById(user)
