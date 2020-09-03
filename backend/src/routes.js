@@ -3,10 +3,13 @@ const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 
 const DevController = require('./controllers/DevController')
-const LikeController = require('./controllers/LikeController')
-const DislikeController = require('./controllers/DislikeController')
 
 const ChannelController = require('./controllers/ChannelController')
+
+const LikeController = require('./controllers/LikeController')
+const DislikeController = require('./controllers/DislikeController')
+const FollowController = require('./controllers/FollowController')
+const IgnoreController = require('./controllers/IgnoreController')
 
 const YtdSubscriptionsController = require('./controllers/YtdSubscriptionsController')
 const YtdQuickStartController = require('./controllers/YtdQuickStartController')
@@ -16,7 +19,7 @@ const CreateDevService = require('./services/CreateDev')
 const routes = express.Router()
 
 routes.get('/', (req, res) => {
-  return res.json({ message: `Hello World`, params: req.params, body: req.body, query: req.query })
+  return res.json({ message: `HelloWorld@DevFinder`, params: req.params, body: req.body, query: req.query })
 })
 
 routes.use(passport.initialize());
@@ -65,11 +68,14 @@ routes.get('/auth/github/callback',
 
 routes.get('/devs', DevController.index)
 routes.post('/devs', DevController.store)
-routes.post('/devs/:username/likes', LikeController.store)
-routes.post('/devs/:username/dislikes', DislikeController.store)
 
 routes.get('/channels', ChannelController.index)
 routes.post('/channels', ChannelController.store)
+
+routes.post('/devs/:username/likes', LikeController.store)
+routes.post('/devs/:username/dislikes', DislikeController.store)
+routes.post('/channels/:username/likes', FollowController.store)
+routes.post('/channels/:username/dislikes', IgnoreController.store)
 
 routes.get('/ytd/subscriptions', YtdSubscriptionsController.index)
 routes.get('/ytd/auth', YtdQuickStartController.index)

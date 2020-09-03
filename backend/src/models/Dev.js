@@ -21,6 +21,14 @@ const DevSchema = new Schema({
   deslikes: [{
     type: Schema.Types.ObjectId,
     ref: 'Dev',
+  }],
+  follow: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Channel',
+  }],
+  ignore: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Channel',
   }]
 }, {
   timestamps: true,
