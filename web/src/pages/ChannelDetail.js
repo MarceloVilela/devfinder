@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaYoutube, FaGithub } from 'react-icons/fa';
+import { MdSyncDisabled, MdStarBorder } from 'react-icons/md'
 import { toast } from 'react-toastify';
 
 import api from '../services/api'
+import { useAuth } from '../hooks/auth';
 import { Header, Container } from '../components'
 import './ChannelDetail.css'
 
 export default function Main({ match }) {
+  const { user } = useAuth();
+  console.log('detail.useAuth', user);
   const [channel, setchannel] = useState({})
   const [loading, setLoading] = useState(false)
 
@@ -15,17 +19,13 @@ export default function Main({ match }) {
 
   useEffect(() => {
     async function loadchannels() {
+      const { id } = match.params;
+      const channelName = id.toLocaleLowerCase();
+
       try {
         setLoading(true)
 
-        const response = await api.get('/channels', {
-          headers: {
-            user: match.params.id
-          }
-        })
-
-        const { id } = match.params;
-        const channelName = id.toLocaleLowerCase();
+        const response = await api.get('/channels')
 
         const findById = response.data.find(item => item.name.toLocaleLowerCase() === channelName)
         if (!findById) {
@@ -34,11 +34,10 @@ export default function Main({ match }) {
         }
 
         const [data] = response.data.filter(item => item.name.toLocaleLowerCase() === channelName)
-        console.log(match.params.id, data, response.data)
 
         setchannel(data)
       } catch (error) {
-
+        toast.error(`Erro ao detalhes do canal: ${id}`)
       } finally {
         setLoading(false)
       }
@@ -46,6 +45,34 @@ export default function Main({ match }) {
     }
     loadchannels()
   }, [history, match.params])
+
+  async function handleDislike() {
+    if (!user) {
+      toast.error('Acessando como visitante, não é possível desabilitar.');
+      return;
+    }
+
+    try {
+      await api.post(`/channels/${channel.name}/dislikes`)
+      toast.success('Desabilitado com sucesso')
+    } catch (error) {
+      toast.error('Erro ao desabilitar.');
+    }
+  }
+
+  async function handleLike() {
+    if (!user) {
+      toast.error('Acessando como visitante, não é possível favoritar.');
+      return;
+    }
+
+    try {
+      await api.post(`/channels/${channel.name}/likes`)
+      toast.success('Favoritado com sucesso')
+    } catch (error) {
+      toast.error('Erro ao favoritar.');
+    }
+  }
 
   return (
     <>
@@ -76,6 +103,15 @@ export default function Main({ match }) {
                     <div>
                       <strong>Sobre</strong>
                       <p>{channel.description}</p>
+
+                      <div className='buttons'>
+                        <button type='button' onClick={() => handleDislike()}>
+                          <MdSyncDisabled className="dislike" />
+                        </button>
+                        <button type='button' onClick={() => handleLike()}>
+                          <MdStarBorder />
+                        </button>
+                      </div>
                     </div>
 
                     <div>
@@ -88,13 +124,13 @@ export default function Main({ match }) {
                         <FaYoutube color="#ff0000" />
                       </a>
                       {channel.userGithub &&
-                      <a
-                        href={`https://github.com/${channel.userGithub}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaGithub color="#fff" />
-                      </a>
+                        <a
+                          href={`https://github.com/${channel.userGithub}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaGithub color="#fff" />
+                        </a>
                       }
                     </div>
                   </aside>
