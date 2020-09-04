@@ -6,7 +6,7 @@ import './Login.css'
 
 export default function Login({ history }) {
   const location = useLocation();
-  const { socialAuthCallback, signOut } = useAuth();
+  const { user, socialAuthCallback, signOut, message } = useAuth();
 
   useEffect(() => {
     signOut();
@@ -15,12 +15,25 @@ export default function Login({ history }) {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const userId = queryParams.get('id')
+    const token = queryParams.get('token')
+    const user = { id: userId }
 
     if (userId) {
-      socialAuthCallback({ id: userId });
-      history.push('main')
+      socialAuthCallback({ user, token })
     }
-  }, [history, location.search, socialAuthCallback])
+  }, [location.search, socialAuthCallback])
+
+  useEffect(() => {
+    if (user && Object.keys(user).includes('_id')) {
+      history.push('/main');
+    }
+  }, [history, user])
+
+  useEffect(() => {
+    if (message) {
+      toast.error(message.content);
+    }
+  }, [message])
 
   return (
     <div className='login-container'>

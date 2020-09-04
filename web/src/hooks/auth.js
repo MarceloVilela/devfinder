@@ -1,21 +1,20 @@
 import React, { createContext, useCallback, useState, useContext } from 'react'
 import api from '../services/api';
+import { toast } from 'react-toastify';
 
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
+    const [message, setMessage] = useState({})
     const [data, setData] = useState(() => {
-        //const token = localStorage.getItem('@DevFinder:token');
+        const token = localStorage.getItem('@DevFinder:token');
         const user = localStorage.getItem('@DevFinder:user');
-        console.log('auth-recover', user)
 
         if (/*token && */user) {
             const userParsed = JSON.parse(user);
-            //api.defaults.headers.authorization = `Bearer ${token}`;
-            api.defaults.headers.authorization = userParsed.id;
+            api.defaults.headers.authorization = `Bearer ${token}`;
 
-            console.log('auth-setData', userParsed)
-            return { /*token,*/ user: userParsed };
+            return { token, user: userParsed };
         }
 
         return {};
@@ -28,19 +27,31 @@ const AuthProvider = ({ children }) => {
         setData({});
     }, [])
 
-    const socialAuthCallback = useCallback((user) => {
-        api.defaults.headers.authorization = user.id;
+    const socialAuthCallback = useCallback(({ user: userId, token }) => {
+        api.defaults.headers.authorization = `Bearer ${token}`;
+        localStorage.setItem('@DevFinder:token', token);
 
-        localStorage.setItem('@DevFinder:user', JSON.stringify(user));
+        async function loadProfile() {
+            try {
+                const { data: user } = await api.get('/me')
 
-        setData({
-            //token: data.token,
-            user
-        })
+                localStorage.setItem('@DevFinder:user', JSON.stringify(user));
+
+                setData({
+                    token,
+                    user
+                })
+            } catch (error) {
+                setMessage({ content: 'Erro ao listar perfil - ' + error.message, type: 'error' })
+            }
+        }
+        loadProfile()
+
+        return;
     }, [setData])
 
     return (
-        <AuthContext.Provider value={{ user: data.user, signOut, socialAuthCallback }}>
+        <AuthContext.Provider value={{ user: data.user, signOut, socialAuthCallback, message }}>
             {children}
         </AuthContext.Provider>
     )
