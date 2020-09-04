@@ -3,11 +3,10 @@ const Channel = require('../models/Channel')
 
 module.exports = {
   async store(req, res) {
-    const { authorization: user } = req.headers
+    const { userId } = req;
     const { username } = req.params
 
-    console.log(`user ${user} follow channel ${username}`)
-    const loggedDev = await Dev.findById(user)
+    const loggedDev = await Dev.findById(userId)
     const targetChannel = await Channel.findOne({ name: username })
 
     if (!targetChannel) {

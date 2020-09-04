@@ -2,10 +2,10 @@ const Dev = require('../models/Dev')
 
 module.exports = {
   async store(req, res) {
-    const { authorization: user } = req.headers
+    const { userId } = req;
     const { username } = req.params
 
-    const loggedDev = await Dev.findById(user)
+    const loggedDev = await Dev.findById(userId)
     const targetDev = await Dev.findOne({ user: username })
 
     if (!targetDev) {

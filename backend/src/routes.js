@@ -1,8 +1,14 @@
 const express = require('express')
+const jwt = require('jsonwebtoken');
+
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 
+const authMiddleware = require('./middlewares/auth');
+const authConfig = require('./config/auth');
+
 const DevController = require('./controllers/DevController')
+const ProfileController = require('./controllers/ProfileController')
 
 const ChannelController = require('./controllers/ChannelController')
 
@@ -60,7 +66,12 @@ routes.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     const { _id, name, user, bio, avatar, createdAt, updatedAt, likes, deslikes } = req.user;
-    return res.redirect(process.env.APP_WEB_URL + `?id=${_id}`)
+
+    const token = jwt.sign({ _id }, authConfig.secret, {
+      expiresIn: authConfig.expiresIn,
+    })
+
+    return res.redirect(process.env.APP_WEB_URL + `?id=${_id}&token=${token}`)
     return res.json({ 'auth': 'github', _id, name, user, bio, avatar, createdAt, updatedAt, likes, deslikes })
   }
 );
@@ -71,6 +82,14 @@ routes.post('/devs', DevController.store)
 
 routes.get('/channels', ChannelController.index)
 routes.post('/channels', ChannelController.store)
+
+/*
+ * Authenticate user (admin)
+ */
+
+routes.use(authMiddleware);
+
+routes.get('/me', ProfileController.show)
 
 routes.post('/devs/:username/likes', LikeController.store)
 routes.post('/devs/:username/dislikes', DislikeController.store)
