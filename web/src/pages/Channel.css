@@ -1,24 +1,3 @@
-.channel-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.channel-container>aside {
-  margin-bottom: 2rem;
-}
-
-@media (min-width: 900px) {
-  .channel-container {
-    flex-direction: row;
-  }
-
-  .channel-container>aside {
-    width: 200px;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
-}
-
 .categories {
   display: grid;
   grid-template-columns: repeat(auto-fill, 96px);

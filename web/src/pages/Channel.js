@@ -2,6 +2,8 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { Link, } from 'react-router-dom'
 import { FaGithub } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import api from '../services/api'
 import { Header, Container, IconCategory } from '../components'
@@ -30,30 +32,36 @@ export default function Main({ match }) {
     loadchannels()
   }, [loggedUserId])
 
-  const categories = useMemo(() => {
+  const channelsCategorized = useMemo(() => {
     const items = channels;
-
     const names = items.map(item => item.category)
-    const uniqueNames = ['Todos os canais', ...new Set(names)]
 
-    return uniqueNames
+    console.log(names)
+    let data = {};
+    names.forEach(category => {
+      if (category !== 'Todos os canais') {
+        data[category] = channels.filter(item => item.category === category)
+      }
+      else {
+        data[category] = channels
+      }
+    })
+
+    console.log(data)
+    return data
   }, [channels])
 
-  const channelsFiltered = useMemo(() => {
-    return filter ? channels.filter(item => item.category === filter) : channels
-  }, [channels, filter])
+  const categories = useMemo(() => {
+    return Object.keys(channelsCategorized)
+  }, [channelsCategorized])
 
-  const channelsCount = useMemo(() => {
-    return filter ? channels.filter(item => item.category === filter).length : channels.length
-  }, [channels, filter])
-
-  const handleSetCategory = useCallback((categoryName) => {
-    const value = channels.filter(item => item.category === categoryName).length
-      ? categoryName
-      : ''
-
-    setFilter(value)
-  }, [channels])
+  const categoryCount = useMemo(() => {
+    let data = {};
+    Object.keys(channelsCategorized).forEach(categoryName => {
+      data[categoryName] = channelsCategorized[categoryName].length
+    })
+    return data;
+  }, [channelsCategorized])
 
   return (
     <>
@@ -62,60 +70,45 @@ export default function Main({ match }) {
       <Container loading={loading}>
         <div className='channel-container'>
 
-          <aside>
-            {categories.length > 1 ? (
-              <ul className='categories list-flex-row'>
-                {categories.map((name) => (
-                  <li
-                    key={name}
-                    onClick={() => handleSetCategory(name)}
-                    className={(name === filter) || (filter === '' && name === 'Todos os canais') ? 'selected' : ''}
-                  >
-                    <div><IconCategory name={name} /></div>
-                    <p>{name}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : ''}
-          </aside>
-
           <section>
-            <div className="channels-description">
-              <p>
-                <strong>{channelsCount} </strong> canais
-                {!!filter && (<>&nbsp; sobre <strong>{filter}</strong></>)}
-                , essa lista foi baseada no projeto
-                <a
-                  href="https://github.com/carolsoaressantos/videos-pt.br-tecnologia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub />
-                </a>
-              </p>
-            </div>
+            <Tabs>
 
-            {(channelsFiltered.length > 0) && (
-              <ul className='channels list-flex-row'>
-                {channelsFiltered.map((item) => (
-                  <Link to={`/channel/${item.name}`} key={item._id}>
-                    <li>
-                      <div className="avatar">
-                        <img
-                          src={item.avatar ? item.avatar : 'https://yt3.ggpht.com/a/AATXAJzF6fuUyEFRBtZSpScb9M-Dq4QI6pyv0ic3pw=s100-c-k-c0xffffffff-no-rj-mo'}
-                          alt={item.name}
-                        />
-                      </div>
-
-                      <aside>
-                        <strong>{item.name}</strong>
-                        <small>{item.tags.join(", ")}</small>
-                      </aside>
-                    </li>
-                  </Link>
+              <TabList>
+                {categories.map(name => (
+                  <Tab key={name}>{name}({categoryCount[name]})</Tab>
                 ))}
-              </ul>
-            )}
+              </TabList>
+
+              {categories.map(name => (
+                <TabPanel key={name}>
+                  <ul className='channels list-flex-row'>
+                    {channelsCategorized[name].map((item) => (
+                      <Link to={`/channel/${item.name}`} key={item._id}>
+                        <li>
+                          <div className="avatar">
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <img
+                                src={item.avatar ? item.avatar : 'https://yt3.ggpht.com/a/AATXAJzF6fuUyEFRBtZSpScb9M-Dq4QI6pyv0ic3pw=s100-c-k-c0xffffffff-no-rj-mo'}
+                                alt={item.name}
+                              />
+                            </a>
+                          </div>
+
+                          <aside>
+                            <strong>{item.name}</strong>
+                            <small>{item.tags.join(", ")}</small>
+                          </aside>
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                </TabPanel>
+              ))}
+            </Tabs>
           </section>
         </div>
       </Container>

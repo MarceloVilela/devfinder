@@ -64,3 +64,7 @@ main {
   flex-direction: column;
   /*border: 1px solid #ccc;*/
 }
+
+.container .react-tabs__tab, .container .react-tabs__tab--selected {
+  color: #9373d8;
+}
