@@ -7,7 +7,7 @@ module.exports = {
     const { username } = req.params
 
     const loggedDev = await Dev.findById(userId)
-    const targetChannel = await Dev.findOne({ name: username })
+    const targetChannel = await Channel.findOne({ name: username })
 
     if (!targetChannel) {
       return res.status(400).json({ error: 'Channel not exists' })

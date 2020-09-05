@@ -6,13 +6,13 @@ const createDevService = require('../services/CreateDev')
 
 module.exports = {
   async index(req, res) {
-    const { authorization: user } = req.headers
+    const { userId } = req;
 
     let devs = [];
 
-    if (isUuid(user)) {
-      const loggedDev = await Dev.findById(user)
-      console.log('usuario logado: ', loggedDev);
+    if (userId) {
+      const loggedDev = await Dev.findById(userId)
+      console.log('usuario logado: ', loggedDev._id);
 
       if (!loggedDev) {
         throw new Error(`user ${user} not found`)
@@ -20,7 +20,7 @@ module.exports = {
 
       devs = await Dev.find({
         $and: [
-          { _id: { $ne: user } },
+          { _id: { $ne: loggedDev._id } },
           { _id: { $nin: loggedDev.likes } },
           { _id: { $nin: loggedDev.deslikes } },
         ],
