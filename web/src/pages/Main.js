@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 import api from '../services/api'
 import { Header, Container } from '../components'
@@ -8,24 +10,38 @@ import Thumbnail from '../assets/thumbnail.jpg'
 import './Main.css'
 
 export default function Main({ match }) {
-  const [subs, setSubs] = useState([])
+  const [trendItems, setTrendItems] = useState([])
+  const [subItems, setSubItems] = useState([])
   const [loading, setloading] = useState(false)
 
   useEffect(() => {
-    async function loadUsers() {
+    async function loadTrend() {
       try {
         setloading(true)
-
-        await api.get('/devs')
-        
-        setSubs(subsPlaceHolder.filter(item => !item.channel.includes('Zurubabel')))
+        const { data } = await api.get('/feed/trending')
+        setTrendItems(data)
       } catch (error) {
         toast.error('Erro ao listar feed')
       } finally {
         setloading(false)
       }
     }
-    loadUsers()
+    loadTrend()
+  }, [])
+
+  useEffect(() => {
+    async function loadTrend() {
+      try {
+        setloading(true)
+        const { data } = await api.get('/feed/subscriptions')
+        setSubItems(data)
+      } catch (error) {
+        toast.error('Erro ao listar feed das inscrições')
+      } finally {
+        setloading(false)
+      }
+    }
+    loadTrend()
   }, [])
 
   return (
@@ -33,35 +49,77 @@ export default function Main({ match }) {
       <Header />
 
       <Container loading={loading} className="container-full-width">
-        {subs.length > 0 ? (
-          <ul className="subs list-flex-column">
-            {subs.map((item) => (
-              <li key={item.title}>
-                <div className="thumb">
-                  <img
-                    src={Thumbnail}
-                    alt={item.title}
-                  />
-                </div>
+        <Tabs>
+          <TabList>
+            <Tab>Explorar</Tab>
+            <Tab>Inscrições</Tab>
+          </TabList>
 
-                <footer className='container-edge-spacing'>
-                  <div className='avatar'>
-                    <img
-                      src={'https://yt3.ggpht.com/a/AATXAJzF6fuUyEFRBtZSpScb9M-Dq4QI6pyv0ic3pw=s100-c-k-c0xffffffff-no-rj-mo'}
-                      alt={item.title}
-                    />
-                  </div>
+          <TabPanel>
+            {trendItems.length > 0 ? (
+              <ul className="subs list-flex-column">
+                {trendItems.map((item) => (
+                  <li key={item.title}>
+                    <div className="thumb">
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                      />
+                    </div>
 
-                  <div className='bio'>
-                    <strong>{item.title}</strong>
-                    <small>{item.channel}</small>
-                  </div>
-                </footer>
+                    <footer className='container-edge-spacing'>
+                      <div className='avatar'>
+                        <img
+                          src={item.thumbnail}
+                          alt={item.title}
+                        />
+                      </div>
 
-              </li>
-            ))}
-          </ul>
-        ) : <div className="empty">Acabou :(</div>}
+                      <div className='bio'>
+                        <strong>{item.title}</strong>
+                        <small>{item.channel}</small>
+                      </div>
+                    </footer>
+
+                  </li>
+                ))}
+              </ul>
+            ) : <div className="empty">Acabou :(</div>}
+          </TabPanel>
+          <TabPanel>
+            {subItems.length > 0 ? (
+              <ul className="subs list-flex-column">
+                {subItems.map((item) => (
+                  <li key={item.title}>
+                    <div className="thumb">
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                      />
+                    </div>
+
+                    <footer className='container-edge-spacing'>
+                      <div className='avatar'>
+                        <img
+                          src={item.thumbnail}
+                          alt={item.title}
+                        />
+                      </div>
+
+                      <div className='bio'>
+                        <strong>{item.title}</strong>
+                        <small>{item.channel}</small>
+                      </div>
+                    </footer>
+
+                  </li>
+                ))}
+              </ul>
+            ) : <div className="empty">Acabou :(</div>}
+          </TabPanel>
+        </Tabs>
+
+
       </Container>
     </>
   )
