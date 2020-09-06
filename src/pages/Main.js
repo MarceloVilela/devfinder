@@ -5,8 +5,6 @@ import 'react-tabs/style/react-tabs.css';
 
 import api from '../services/api'
 import { Header, Container } from '../components'
-import subsPlaceHolder from '../assets/subs.json'
-import Thumbnail from '../assets/thumbnail.jpg'
 import './Main.css'
 
 export default function Main({ match }) {

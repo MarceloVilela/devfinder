@@ -1,18 +1,16 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Link, } from 'react-router-dom'
-import { FaGithub } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import api from '../services/api'
-import { Header, Container, IconCategory } from '../components'
+import { Header, Container } from '../components'
 import './Channel.css'
 
 export default function Main({ match }) {
   const [channels, setchannels] = useState([])
   const [loading, setloading] = useState(false)
-  const [filter, setFilter] = useState('')
   const loggedUserId = localStorage.getItem('@DevFinder:user')
 
   useEffect(() => {
