@@ -1,0 +1,27 @@
+ul.paginate {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.paginate li {
+    background-color: #685394;
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    color: #ccc;
+}
+
+ul.paginate li:hover {
+    opacity: 0.7;
+}
+
+ul.paginate li.selected {
+    font-weight: bold;
+    color: #fff;
+}
+
+.begin, .end {
+    opacity: 0.7;
+}

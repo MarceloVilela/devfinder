@@ -11,7 +11,7 @@ interface LoginProps {
   }
 }
 
-const Login: React.FC<LoginProps> = ({history}) => {
+const Login: React.FC<LoginProps> = ({ history }) => {
   const location = useLocation();
   const { user, socialAuthCallback, signOut, message } = useAuth();
 
@@ -45,7 +45,7 @@ const Login: React.FC<LoginProps> = ({history}) => {
   return (
     <div className='login-container'>
       <form>
-        <h1 className="logo">DevFinder</h1>
+        <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
 
         <Link to='main' className="login-visitor">Acessar como visitante</Link>
 

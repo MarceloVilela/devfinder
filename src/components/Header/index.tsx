@@ -9,7 +9,7 @@ export default function Header() {
     <header>
       <section>
         <Link to={`/main`}>
-          <h1 className="logo">Title</h1>
+          <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
         </Link>
 
         <nav>

@@ -5,7 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 
 import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
-import { Header, Container } from '../../components'
+import { Header, Container, Paginate } from '../../components'
 import './style.css'
 
 interface VideoData {
@@ -21,17 +21,24 @@ interface VideoData {
 }
 
 export default function Main() {
-  const [trendItems, setTrendItems] = useState<VideoData[]>([] as VideoData[])
-  const [subItems, setSubItems] = useState<VideoData[]>([] as VideoData[])
-  const [loading, setloading] = useState(false)
   const { user } = useAuth();
+
+  const [loading, setloading] = useState(false)
+  const [trendItems, setTrendItems] = useState<VideoData[]>([] as VideoData[])
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(0);
+
+  const [subItems, setSubItems] = useState<VideoData[]>([] as VideoData[])
 
   useEffect(() => {
     async function loadTrend() {
       try {
         setloading(true)
-        const { data } = await api.get('/feed/trending')
-        setTrendItems(data)
+        const { data } = await api.get('/feed/trending', { params: { page } })
+        setTrendItems(data.docs)
+        setTotal(data.total);
+        setItemsPerPage(data.itemsPerPage);
       } catch (error) {
         toast.error('Erro ao listar feed')
       } finally {
@@ -39,7 +46,7 @@ export default function Main() {
       }
     }
     loadTrend()
-  }, [])
+  }, [page])
 
   useEffect(() => {
     if (!user) {
@@ -105,6 +112,8 @@ export default function Main() {
                 ))}
               </ul>
             ) : <div className="empty">Acabou :(</div>}
+            <div>{total} / {itemsPerPage}</div>
+            <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
           </TabPanel>
           {(user && user._id) &&
             <TabPanel>
