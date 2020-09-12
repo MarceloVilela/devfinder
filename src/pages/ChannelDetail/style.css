@@ -39,7 +39,7 @@
   border-radius: 0 0 5px 5px;
 }
 
-.about aside > div {
+.about aside>div {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -55,7 +55,8 @@
   font-size: 14px;
   line-height: 20px;
   color: #c1bec7;
-  width: 100%;;
+  width: 100%;
+  ;
 }
 
 .about aside svg {
@@ -77,6 +78,14 @@
   border-radius: 4px;
   background: #685394;
   cursor: pointer;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about .buttons button span {
+  margin-right: 16px;
 }
 
 .about .buttons button svg {
@@ -91,7 +100,6 @@
 }
 
 .about .buttons button:hover svg.dislike {
-transform: translateY(+5px);
-transition: all .2s;
+  transform: translateY(+5px);
+  transition: all .2s;
 }
-

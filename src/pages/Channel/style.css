@@ -44,7 +44,6 @@
   .categories {
     grid-template-columns: repeat(1, 1fr);
   }
-
   .categories li {
     flex-direction: row;
     align-items: center;
@@ -54,11 +53,9 @@
     background: #3d3451;
     border-radius: 10px;
   }
-
   .categories li.selected {
     background: #524473;
   }
-
   .categories li p {
     line-height: 21px;
     height: auto;
@@ -145,4 +142,30 @@
   font-size: 24px;
   color: #eee;
   margin: 0 0 -4px 16px;
+}
+
+.channel-container .react-tabs__tab-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  border: 0;
+}
+
+.channel-container .react-tabs__tab {
+  background: inherit;
+  color: #999;
+  border-radius: 0;
+  border: 0;
+  /**/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #666;
+  border-radius: 8px;
+  height: 50px;
+}
+
+.channel-container .react-tabs__tab--selected {
+  color: #FFF;
+  border: 2px solid #9373d8;
 }

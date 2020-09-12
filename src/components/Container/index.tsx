@@ -7,15 +7,15 @@ interface ContainerProps {
   children: ReactNode;
   loading: boolean;
   className?: string;
+  unstylized?: boolean;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, loading, className }) => {
+const Container: React.FC<ContainerProps> = ({ children, loading, className, unstylized }) => {
   return (
-    <main className={`container ${className}`}>
-      {}
+    <main className={`${unstylized ? '' : 'container'} ${className}`}>
       {loading
         ? (
-          <article>
+          <article className='loading-wrapper'>
             <img
               src={indicator}
               alt="Loading"

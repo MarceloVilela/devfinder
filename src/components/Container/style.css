@@ -5,14 +5,14 @@ main.container {
   text-align: center;
 
   /* header fixed */
-  padding-top: 140px;
+  padding-top: 100px;
 }
 
 @media screen and (max-width: 1024px) {
   main.container { 
     padding: 40px 22px;
     /* header fixed */
-    padding-top: 140px; 
+    padding-top: 100px; 
   }
 
 
@@ -27,14 +27,14 @@ main.container {
   }
 }
 
-main.container > article {
+main > article.loading-wrapper {
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-main.container > article img {
+main > article.loading-wrapper img {
   width: 64px;
   height: 64px;
 }

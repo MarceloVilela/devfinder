@@ -9,7 +9,7 @@ export interface UserData {
     likes: string[];
     deslikes: string[];
     follow: string[];
-    ignore: [];
+    ignore: string[];
     _id: string;
     name: string;
     user: string;
@@ -30,6 +30,7 @@ interface ReturnedCode {
 
 interface AuthContextData {
     user: UserData;
+    setUser(user: UserData): void;
     socialAuthCallback(data: ReturnedCode): void;
     signOut(): void;
     message: {
@@ -86,8 +87,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
     }, [setData])
 
+    const setUser = useCallback((user: UserData) => {
+        setData({
+            token: data.token,
+            user
+        });
+
+        localStorage.setItem('@DevFinder:user', JSON.stringify(user));
+    }, [setData, data.token])
+
     return (
-        <AuthContext.Provider value={{ user: data.user, signOut, socialAuthCallback, message }}>
+        <AuthContext.Provider value={{ user: data.user, setUser, signOut, socialAuthCallback, message }}>
             {children}
         </AuthContext.Provider>
     )

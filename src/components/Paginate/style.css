@@ -2,6 +2,7 @@ ul.paginate {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 ul.paginate li {

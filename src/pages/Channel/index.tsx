@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import api from '../../services/api'
+import { useAuth } from '../../hooks/auth';
 import { Header, Container } from '../../components'
 import { ChannelData } from '../ChannelDetail'
 import './style.css'
@@ -18,9 +19,10 @@ interface CategoryCounter {
 }
 
 export default function Channel() {
+  const { user } = useAuth();
+
   const [channels, setchannels] = useState<ChannelData[]>([])
   const [loading, setloading] = useState(false)
-  const loggedUserId = localStorage.getItem('@DevFinder:user')
 
   useEffect(() => {
     async function loadchannels() {
@@ -37,24 +39,23 @@ export default function Channel() {
 
     }
     loadchannels()
-  }, [loggedUserId])
+  }, [])
 
   const channelsCategorized = useMemo(() => {
     const items = channels;
-    const names = items.map(item => item.category)
+    const categoriesName = items.map(item => item.category)
 
-    console.log(names)
-    let data = {} as ChannelsGroupedByCategory;
-    names.forEach(category => {
+    let data = { 'Todos os canais': channels } as ChannelsGroupedByCategory;
+
+    data['Favoritos'] = channels.filter(item => user.follow.includes(item._id));
+    data['Não seguidos'] = channels.filter(item => user.ignore.includes(item._id));
+
+    categoriesName.forEach(category => {
       if (category !== 'Todos os canais') {
         data[category] = channels.filter(item => item.category === category)
       }
-      else {
-        data[category] = channels
-      }
     })
 
-    console.log(data)
     return data
   }, [channels])
 

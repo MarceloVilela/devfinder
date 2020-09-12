@@ -65,6 +65,19 @@ main {
   /*border: 1px solid #ccc;*/
 }
 
-.container .react-tabs__tab, .container .react-tabs__tab--selected {
-  color: #9373d8;
+.wrap-tabs-inline .react-tabs__tab-list {
+  display: flex;
+  border: 0;
+}
+
+.wrap-tabs-inline .react-tabs__tab {
+  background: inherit;
+  color: #999;
+  border-radius: 0;
+  border: 0;
+}
+
+.wrap-tabs-inline .react-tabs__tab--selected {
+  color: #FFF;
+  border-bottom: 2px solid #9373d8;
 }

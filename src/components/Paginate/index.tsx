@@ -7,7 +7,7 @@ interface PaginateProps {
   page: number;
   totalItems?: number;
   itemsPerPage?: number;
-  handlePaginate(page: number): void;
+  handlePaginate(goTo: number): void;
 }
 
 const Container: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, handlePaginate }) => {
@@ -33,7 +33,6 @@ const Container: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, ha
 
   return (
     <>
-      <div>{totalItems} / {itemsPerPage} = {totalPages}</div>
       <ul className="paginate">
         {page !== 1 &&
           <li onClick={() => handlePaginate(1)}>

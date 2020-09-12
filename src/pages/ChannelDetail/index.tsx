@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { FaYoutube, FaGithub } from 'react-icons/fa';
 import { MdSyncDisabled, MdStarBorder } from 'react-icons/md'
@@ -33,12 +33,11 @@ interface ChannelDetailProps {
 }
 
 const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
-  const { user } = useAuth();
-  console.log('detail.useAuth', user);
+  const { user, setUser } = useAuth();
+  const history = useHistory();
+
   const [channel, setchannel] = useState<ChannelData>({} as ChannelData)
   const [loading, setLoading] = useState(false)
-
-  const history = useHistory();
 
   useEffect(() => {
     async function loadchannels() {
@@ -65,6 +64,50 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     loadchannels()
   }, [history, match.params])
 
+  const includedInLike = useMemo(() => {
+    if (!user) {
+      return false
+    }
+    return user.follow.includes(channel._id);
+  }, [user, channel])
+
+  const includedInDislike = useMemo(() => {
+    if (!user) {
+      return false
+    }
+    return user.ignore.includes(channel._id);
+  }, [user, channel])
+
+  async function handleUndoDislike() {
+    if (!user) {
+      toast.error('Acessando como visitante, não é possível desabilitar.');
+      return;
+    }
+
+    try {
+      const { data } = await api.delete(`/channels/${channel.name}/dislikes`);
+      toast.success(`${channel.name} saiu de: Não seguidos`);
+      setUser(data);
+    } catch (error) {
+      toast.error('Erro ao desabilitar.');
+    }
+  }
+
+  async function handleUndoLike() {
+    if (!user) {
+      toast.error('Acessando como visitante, não é possível favoritar.');
+      return;
+    }
+
+    try {
+      const { data } = await api.delete(`/channels/${channel.name}/likes`)
+      toast.success(`${channel.name} saiu de: Favoritos`);
+      setUser(data);
+    } catch (error) {
+      toast.error('Erro ao favoritar.');
+    }
+  }
+
   async function handleDislike() {
     if (!user) {
       toast.error('Acessando como visitante, não é possível desabilitar.');
@@ -72,8 +115,9 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      await api.post(`/channels/${channel.name}/dislikes`)
-      toast.success('Desabilitado com sucesso')
+      const { data } = await api.post(`/channels/${channel.name}/dislikes`)
+      toast.success(`${channel.name} foi para: Não seguidos`);
+      setUser(data);
     } catch (error) {
       toast.error('Erro ao desabilitar.');
     }
@@ -86,8 +130,9 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      await api.post(`/channels/${channel.name}/likes`)
-      toast.success('Favoritado com sucesso')
+      const { data } = await api.post(`/channels/${channel.name}/likes`)
+      toast.success(`${channel.name} foi para: Favoritos`);
+      setUser(data);
     } catch (error) {
       toast.error('Erro ao favoritar.');
     }
@@ -124,12 +169,29 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
                       <p>{channel.description}</p>
 
                       <div className='buttons'>
-                        <button type='button' onClick={() => handleDislike()}>
-                          <MdSyncDisabled className="dislike" />
-                        </button>
-                        <button type='button' onClick={() => handleLike()}>
-                          <MdStarBorder />
-                        </button>
+                        {(!includedInDislike && !includedInLike) &&
+                          <>
+                            <button type='button' onClick={() => handleDislike()}>
+                              <MdSyncDisabled className="dislike" />
+                            </button>
+
+                            <button type='button' onClick={() => handleLike()}>
+                              <MdStarBorder />
+                            </button>
+                          </>
+                        }
+                        
+                        {includedInDislike &&
+                          <button type='button' onClick={() => handleUndoDislike()}>
+                            <MdSyncDisabled className="dislike" /><span>Desmarcar</span>
+                          </button>
+                        }
+
+                        {includedInLike &&
+                          <button type='button' onClick={() => handleUndoLike()}>
+                            <MdStarBorder /><span>Desmarcar</span>
+                          </button>
+                        }
                       </div>
                     </div>
 

@@ -1,13 +1,3 @@
-.users {
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 600px) {
-  .users { grid-template-columns: repeat(3, 1fr); }
-}
-
 .users li {
     border: 1px solid #685394;
     border-radius: 10px;
@@ -72,7 +62,7 @@
 
 .users .buttons button svg {
     font-size: 24px;
-    color: #FFF;
+    color: white;
 }
 
 .users .buttons button:hover svg {
@@ -83,26 +73,4 @@
 .users .buttons button:hover svg.dislike {
   transform: translateY(+5px);
   transition: all .2s;
-}
-
-.main-container .empty {
-    font-size: 32px;
-    color: #c1bec7;
-    font-weight: bold;
-    margin-top: 300px;
-}
-
-.users .buttons.single {
-    grid-template-columns: repeat(1, 1fr);
-}
-
-.users .buttons.single button {
-    color: #FFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.users .buttons.single button  svg{
-    margin-right: 10px;
 }
