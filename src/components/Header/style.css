@@ -21,7 +21,7 @@ header section {
 
 @media (max-width: 1024px) {
   header section {
-    padding: 50px 22px 0 22px
+    padding: 22px 22px 0 22px
   }
 }
 
@@ -41,15 +41,16 @@ header section nav a {
   text-decoration: none;
   color: #ccc;
   margin-left: 16px;
+  font-size: 0.8rem
 }
 
 header section nav svg {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .logo {
   font-family: 'Grenze Gotisch', cursive;
-  font-size: 2.5em;
+  font-size: 1.5em;
   text-align: center;
   /* https://www.flaticon.com/br/buscar?word=like */
   /* https://www.w3schools.com/colors/colors_mixer.asp?colorbottom=8A2BE2&colortop=FFFFFF */

@@ -21,6 +21,7 @@ interface CategoryCounter {
 export default function Channel() {
   const { user } = useAuth();
 
+  const [tabIndex, setTabIndex] = useState(0);
   const [channels, setchannels] = useState<ChannelData[]>([])
   const [loading, setloading] = useState(false)
 
@@ -79,7 +80,14 @@ export default function Channel() {
         <div className='channel-container'>
 
           <section>
-            <Tabs>
+            {tabIndex}
+            <select onChange={(e) => setTabIndex(Number(e.target.value))}>
+              {categories.map((name, key) => (
+                <option key={key} value={key}>{name}</option>
+              ))}
+            </select>
+
+            <Tabs selectedIndex={tabIndex} onSelect={index => setTabIndex(index)}>
 
               <TabList>
                 {categories.map(name => (

@@ -6,6 +6,7 @@
 
 .about li {
   display: flex;
+  padding: 16px;
 }
 
 .about .avatar {
@@ -17,7 +18,6 @@
 .about .avatar img {
   width: 100px;
   border-radius: 50px;
-  margin-left: 20px;
 }
 
 .about h3 {
@@ -34,7 +34,7 @@
   justify-content: center;
   /*background-color: #3d3451;
     border: 1px solid #3d3451;*/
-  padding: 15px 20px;
+  padding-left: 16px;
   text-align: left;
   border-radius: 0 0 5px 5px;
 }
@@ -102,4 +102,15 @@
 .about .buttons button:hover svg.dislike {
   transform: translateY(+5px);
   transition: all .2s;
+}
+
+@media (max-width: 1024px) {
+  .about li {
+    flex-direction: column;
+  }
+
+  .about aside {
+    padding-left: 0;
+    padding-top: 16px;
+  }
 }

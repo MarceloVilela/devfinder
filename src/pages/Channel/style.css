@@ -144,11 +144,21 @@
   margin: 0 0 -4px 16px;
 }
 
+.channel-container select {
+  margin-bottom: 24px;
+  padding: 8px;
+  background: inherit;
+  border: 2px solid #9373d8;
+  border-radius: 8px;
+  color: #9373d8;
+}
+
 .channel-container .react-tabs__tab-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.5rem;
   border: 0;
+  display: none;
 }
 
 .channel-container .react-tabs__tab {

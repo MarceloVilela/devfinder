@@ -39,7 +39,7 @@ const Subs = () => {
   }, [page, user])
 
   return (
-    <Container loading={loading} unstylized>
+    <Container loading={loading} unstylized className='container-full-width'>
       <ul className="subs list-flex-column">
         {docs.map((item) => (
           <VideoThumbItem key={item._id} video={item} />

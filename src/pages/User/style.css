@@ -1,11 +1,7 @@
 .users {
   display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 600px) {
-  .users { grid-template-columns: repeat(3, 1fr); }
+  grid-gap: 48px;
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .users li {
@@ -22,6 +18,7 @@
 
 .users .avatar img {
     max-width: 100%;
+    width: 96px;
     border-radius: 5px 5px 0 0;
 }
 
@@ -105,4 +102,17 @@
 
 .users .buttons.single button  svg{
     margin-right: 10px;
+}
+
+@media (min-width: 600px) {
+    .users {
+        grid-gap: 16px;;
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .users .avatar img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+    }
 }
