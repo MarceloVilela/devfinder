@@ -48,8 +48,10 @@ export default function Channel() {
 
     let data = { 'Todos os canais': channels } as ChannelsGroupedByCategory;
 
-    data['Favoritos'] = channels.filter(item => user.follow.includes(item._id));
-    data['Não seguidos'] = channels.filter(item => user.ignore.includes(item._id));
+    if (user && user.follow) {
+      data['Favoritos'] = channels.filter(item => user.follow.includes(item._id));
+      data['Não seguidos'] = channels.filter(item => user.ignore.includes(item._id));
+    }
 
     categoriesName.forEach(category => {
       if (category !== 'Todos os canais') {

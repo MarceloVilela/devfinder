@@ -41,7 +41,7 @@ export default function Main() {
 
   return (
     <Container loading={loading} unstylized className="container-full-width">
-      <ul className="users list-flex-column">
+      <ul className="users list-flex-row">
         {docs.map((user) => (
           <UserItem key={user.user} user={user}>
             <div className='buttons single'>

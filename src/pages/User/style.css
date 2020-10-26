@@ -4,6 +4,33 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
+@media (min-width: 768px) {
+    .users {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .users {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/*
+@media (min-width: 600px) {
+    .users {
+        grid-gap: 16px;;
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .users .avatar img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+    }
+}
+*/
+
 .users li {
     border: 1px solid #685394;
     border-radius: 10px;
@@ -11,7 +38,7 @@
 
 .users .avatar {
   display: flex;
-  flex: 3;
+  /*flex: 3;*/
   justify-content: center;
   align-items: center;
 }
@@ -102,17 +129,4 @@
 
 .users .buttons.single button  svg{
     margin-right: 10px;
-}
-
-@media (min-width: 600px) {
-    .users {
-        grid-gap: 16px;;
-        grid-template-columns: repeat(3, 1fr); 
-    }
-
-    .users .avatar img {
-        max-width: 100%;
-        width: 100%;
-        border-radius: 5px 5px 0 0;
-    }
 }

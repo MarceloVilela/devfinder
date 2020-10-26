@@ -31,6 +31,13 @@ const Login: React.FC<LoginProps> = ({ history }) => {
   }, [location.search, socialAuthCallback])
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const logout = queryParams.get('logout');
+
+    if (logout) {
+      return
+    }
+
     if (user && Object.keys(user).includes('_id')) {
       history.push('/main');
     }

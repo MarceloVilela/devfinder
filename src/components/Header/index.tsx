@@ -28,7 +28,7 @@ export default function Header() {
             <span>Canais</span>
           </Link>
 
-          <Link to={`/`}>
+          <Link to={`/?logout=1`}>
             <FaSignOutAlt />
             <span>Sair</span>
           </Link>
