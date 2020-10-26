@@ -60,7 +60,7 @@ export default function Channel() {
     })
 
     return data
-  }, [channels])
+  }, [channels, user])
 
   const categories = useMemo(() => {
     return Object.keys(channelsCategorized)

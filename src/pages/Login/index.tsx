@@ -41,7 +41,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
     if (user && Object.keys(user).includes('_id')) {
       history.push('/main');
     }
-  }, [history, user])
+  }, [history, user, location.search])
 
   useEffect(() => {
     if (message) {
