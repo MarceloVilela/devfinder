@@ -17,6 +17,8 @@ export default function Main() {
     async function loaddocs() {
       try {
         setLoading(true)
+        setDocs(Array.from(Array(50)).map(item => ({} as UserData)))
+
         const { data } = await api.get('/devs/dislikes')
         setDocs(data)
       } catch (error) {
@@ -40,10 +42,10 @@ export default function Main() {
   }
 
   return (
-    <Container loading={loading} unstylized className="container-full-width">
+    <Container loading={false} unstylized className="container-full-width">
       <ul className="users list-flex-row">
         {docs.map((user) => (
-          <UserItem key={user.user} user={user}>
+          <UserItem key={user.user} user={user} placeholder={loading}>
             <div className='buttons single'>
               <button type='button' onClick={() => handleUndoDislike(user.user)}>
                 <MdSyncDisabled />Desmarcar

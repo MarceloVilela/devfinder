@@ -5,26 +5,50 @@ import './style.css';
 
 interface UserItemProps {
   user: UserData;
+  placeholder: boolean;
 }
 
-const UserItem: React.FC<UserItemProps> = ({ user, children }) => {
+const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
   return (
-    <li key={user.user}>
-      <div className="avatar">
-        <img src={user.avatar} alt={user.name} />
-      </div>
+    <>
+      {!placeholder
+        ? (
+          <li>
+            <div className="avatar">
+              <img src={user.avatar} alt={user.name} />
+            </div>
 
-      <footer>
-        <div className='bio'>
-          <strong>{user.name}</strong>
-          <small>{user.bio}</small>
-        </div>
+            <footer>
+              <div className='bio'>
+                <strong>{user.name}</strong>
+                <small>{user.bio}</small>
+              </div>
 
-        {children}
+              {children}
 
-      </footer>
+            </footer>
 
-    </li>
+          </li>
+        ) : (
+          <li className="placeholder">
+            <div className="avatar">
+              <div></div>
+            </div>
+
+            <footer>
+              <div className='bio'>
+                <p></p>
+                <p></p>
+              </div>
+
+              {children}
+
+            </footer>
+
+          </li>
+        )}
+    </>
+
   );
 }
 

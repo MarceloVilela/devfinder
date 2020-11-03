@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { Link, } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
-import { Header, Container } from '../../components'
+import { Header, Container, ChannelItem } from '../../components'
 import { ChannelData } from '../ChannelDetail'
 import './style.css'
 
@@ -22,16 +22,17 @@ export default function Channel() {
   const { user } = useAuth();
 
   const [tabIndex, setTabIndex] = useState(0);
-  const [channels, setchannels] = useState<ChannelData[]>([])
+  const [channels, setChannels] = useState<ChannelData[]>([])
   const [loading, setloading] = useState(false)
 
   useEffect(() => {
     async function loadchannels() {
       try {
         setloading(true)
+        setChannels(Array.from(Array(50)).map(item => ({} as ChannelData)));
 
         const response = await api.get('/channels')
-        setchannels(response.data)
+        setChannels(response.data)
       } catch (error) {
         toast.error('Erro ao listar canais')
       } finally {
@@ -78,7 +79,7 @@ export default function Channel() {
     <>
       <Header />
 
-      <Container loading={loading}>
+      <Container loading={false}>
         <div className='channel-container'>
 
           <section>
@@ -102,25 +103,7 @@ export default function Channel() {
                   <ul className='channels list-flex-row'>
                     {channelsCategorized[name].map((item) => (
                       <Link to={`/channel/${item.name}`} key={item._id}>
-                        <li>
-                          <div className="avatar">
-                            <a
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <img
-                                src={item.avatar ? item.avatar : 'https://yt3.ggpht.com/a/AATXAJzF6fuUyEFRBtZSpScb9M-Dq4QI6pyv0ic3pw=s100-c-k-c0xffffffff-no-rj-mo'}
-                                alt={item.name}
-                              />
-                            </a>
-                          </div>
-
-                          <aside>
-                            <strong>{item.name}</strong>
-                            <small>{item.tags.join(", ")}</small>
-                          </aside>
-                        </li>
+                        <ChannelItem item={item} placeholder={loading} />
                       </Link>
                     ))}
                   </ul>

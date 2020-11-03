@@ -25,6 +25,8 @@ const Subs = () => {
     async function loadDocs() {
       try {
         setLoading(true)
+        setDocs(Array.from(Array(30)).map(item => ({} as VideoData)))
+
         const { data } = await api.get('/feed/subscriptions', { params: { page } })
         setDocs(data.docs)
         setTotal(data.total);
@@ -39,10 +41,10 @@ const Subs = () => {
   }, [page, user])
 
   return (
-    <Container loading={loading} unstylized className='container-full-width'>
+    <Container loading={false} unstylized className='container-full-width'>
       <ul className="subs list-flex-column">
         {docs.map((item) => (
-          <VideoThumbItem key={item._id} video={item} />
+          <VideoThumbItem key={item._id} video={item} placeholder={loading} />
         ))}
       </ul>
       <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />

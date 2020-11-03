@@ -20,6 +20,8 @@ export default function All() {
     async function loaddocs() {
       try {
         setLoading(true)
+        setDocs(Array.from(Array(50)).map(item => ({} as UserData)))
+
         const { data } = await api.get('/devs', { params: { page } })
         setDocs(data.docs)
         setTotal(data.total);
@@ -56,11 +58,11 @@ export default function All() {
   }
 
   return (
-    <Container loading={loading} unstylized className="container-full-width">
+    <Container loading={false} unstylized className="container-full-width">
 
       <ul className="users list-flex-row">
         {docs.map((user) => (
-          <UserItem key={user.user} user={user}>
+          <UserItem key={user.user} user={user} placeholder={loading}>
             <div className='buttons'>
               <button type='button' onClick={() => handleDislike(user.user)}>
                 <MdSyncDisabled className="dislike" />
