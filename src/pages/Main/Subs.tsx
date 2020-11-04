@@ -47,7 +47,9 @@ const Subs = () => {
           <VideoThumbItem key={item._id} video={item} placeholder={loading} />
         ))}
       </ul>
-      <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
+      {!loading &&
+        <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
+      }
     </Container>
   )
 }

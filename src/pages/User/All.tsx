@@ -75,8 +75,9 @@ export default function All() {
           </UserItem>
         ))}
       </ul>
-      <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
-
+      {!loading &&
+        <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
+      }
     </Container>
   )
 }
