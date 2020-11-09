@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { VideoData } from '../../pages/Main'
-import './style.css';
+import { Thumb } from './style';
 
 interface ItemProps {
   video: VideoData;
@@ -13,7 +13,7 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
     <>
       {!placeholder
         ? (
-          <li>
+          <Thumb>
             <div className="thumb">
               <img
                 src={video.thumbnail}
@@ -35,10 +35,10 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
               </div>
             </footer>
 
-          </li>
+          </Thumb>
         )
         : (
-          <li className="placeholder">
+          <Thumb className="placeholder">
             <div className="thumb">
             </div>
 
@@ -52,7 +52,7 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
               </div>
             </footer>
 
-          </li>
+          </Thumb>
         )}
     </>
   );

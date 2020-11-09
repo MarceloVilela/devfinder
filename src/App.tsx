@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import AppProvider from './hooks';
 import Routes from './Routes'
-import './App.css';
 
 function App() {
   return (
@@ -12,6 +11,7 @@ function App() {
       <AppProvider>
         <Routes />
       </AppProvider>
+
       <ToastContainer />
     </>
   );

@@ -1,11 +1,20 @@
-.login-container {
+import styled from 'styled-components';
+
+export const LoginContainer = styled.div`
+& {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-container form {
+.logo {
+    font-family: 'Grenze Gotisch', cursive;
+    text-align: center;
+    color: ${props => props.theme.primary};
+}
+
+form {
     width: 100%;
     max-width: 300px;
     display: flex;
@@ -15,7 +24,7 @@
     justify-content: space-evenly;
 }
 
-.login-container form input {
+form input {
     margin-top: 20px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -25,12 +34,12 @@
     color: #666;
 }
 
-.login-container form input::placeholder {
+form input::placeholder {
     color: #999;
 }
 
-.login-container form button,
-.login-container form a {
+form button,
+form a {
     margin-top: 10px;
     border: 0;
     border-radius: 4px;
@@ -46,10 +55,10 @@
     align-items: center;
 }
 
-.login-container form .login-visitor {
+form .login-visitor {
     background-color: #007bff;
 }
 
-.login-container form .login-social-github {
+form .login-social-github {
     background-color: #28a745;
-}
+}`;

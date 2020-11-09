@@ -2,11 +2,10 @@ import React from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { useAuth } from '../../hooks/auth'
-import { Header, Container } from '../../components'
+import { Header, Container, Footer } from '../../components'
 import All from './All';
 import Liked from './Liked';
 import Disliked from './Disliked';
-import './style.css'
 
 export default function Main() {
   const { user } = useAuth();
@@ -40,6 +39,8 @@ export default function Main() {
           </TabPanel>
         </Tabs>
       </Container>
+
+      <Footer />
     </>
   )
 }

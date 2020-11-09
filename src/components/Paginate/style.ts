@@ -1,12 +1,15 @@
-ul.paginate {
+import styled from 'styled-components';
+
+export const PaginateList = styled.ul`
+&.paginate {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
 }
 
-ul.paginate li {
-    background-color: #685394;
+li {
+    background-color: ${props => props.theme.primaryStronger};
     padding: 10px 15px;
     margin-right: 10px;
     cursor: pointer;
@@ -14,15 +17,15 @@ ul.paginate li {
     color: #ccc;
 }
 
-ul.paginate li:hover {
+li:hover {
     opacity: 0.7;
 }
 
-ul.paginate li.selected {
+li.selected {
     font-weight: bold;
     color: #fff;
 }
 
 .begin, .end {
     opacity: 0.7;
-}
+}`;

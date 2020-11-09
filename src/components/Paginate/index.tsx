@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 
-import './style.css';
+import { PaginateList } from './style';
 
 interface PaginateProps {
   page: number;
@@ -10,7 +10,7 @@ interface PaginateProps {
   handlePaginate(goTo: number): void;
 }
 
-const Container: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, handlePaginate }) => {
+const Paginate: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, handlePaginate }) => {
   const totalPages = useMemo(() => {
     if (totalItems && itemsPerPage) {
       return Math.ceil(totalItems / itemsPerPage);
@@ -33,7 +33,7 @@ const Container: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, ha
 
   return (
     <>
-      <ul className="paginate">
+      <PaginateList className="paginate">
         {page !== 1 &&
           <li onClick={() => handlePaginate(1)}>
             <FaAngleDoubleLeft className="begin" />
@@ -51,9 +51,9 @@ const Container: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, ha
             <FaAngleDoubleRight className="end" />
           </li>
         }
-      </ul>
+      </PaginateList>
     </>
   );
 }
 
-export default Container;
+export default Paginate;

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import api from '../../services/api'
 import { Paginate, VideoThumbItem, Container } from '../../components'
 import { VideoData } from './index'
-import './style.css'
+import { VideoList } from './style'
 
 const Trend = () => {
   const [loading, setLoading] = useState(false);
@@ -35,11 +35,11 @@ const Trend = () => {
   return (
     <Container loading={false} unstylized className='container-full-width'>
 
-      <ul className="subs list-flex-column">
-        {docs.map((item) => (
-          <VideoThumbItem key={item._id} video={item} placeholder={loading} />
+      <VideoList className="subs list-flex-column">
+        {docs.map((item, key) => (
+          <VideoThumbItem key={key} video={item} placeholder={loading} />
         ))}
-      </ul>
+      </VideoList>
       {!loading &&
         <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
       }

@@ -1,116 +1,120 @@
-.about {
-  background-color: #3d3451;
-  border: 1px solid #3d3451;
-  border-radius: 15px;
-}
+import styled from 'styled-components';
 
-.about li {
+const About = styled.ul`
+  background-color: ${props => props.theme.backgroundWeakerer};
+  border: 1px solid ${props => props.theme.backgroundWeakerer};
+  border-radius: 15px;
+
+
+li {
   display: flex;
   padding: 16px;
 }
 
-.about .avatar {
+.avatar {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.about .avatar img {
+.avatar img {
   width: 100px;
   border-radius: 50px;
 }
 
-.about h3 {
+h3 {
   font-size: 24px;
   font-weight: 400;
-  color: #eee;
+  color: ${props => props.theme.foregroundStronger};
 }
 
-.about aside {
+aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
   justify-content: center;
-  /*background-color: #3d3451;
-    border: 1px solid #3d3451;*/
+  /*background-color: ${props => props.theme.backgroundWeakerer};
+    border: 1px solid ${props => props.theme.backgroundWeakerer};*/
   padding-left: 16px;
   text-align: left;
   border-radius: 0 0 5px 5px;
 }
 
-.about aside>div {
+aside>div {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin-top: 16px;
 }
 
-.about aside strong {
+aside strong {
   font-size: 16px;
-  color: #eee;
+  color: ${props => props.theme.foregroundStronger};
 }
 
-.about aside p {
+aside p {
   font-size: 14px;
   line-height: 20px;
-  color: #c1bec7;
+  color: ${props => props.theme.foregoundStrong};
   width: 100%;
-  ;
 }
 
-.about aside svg {
+aside svg {
   font-size: 32px;
   margin-left: 32px;
 }
 
-.about .buttons {
+.buttons {
   margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
 }
 
-.about .buttons button {
+.buttons button {
   height: 50px;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
   border: 0;
   border-radius: 4px;
-  background: #685394;
+  background: ${props => props.theme.primaryStronger};
   cursor: pointer;
-  color: #FFF;
+  color: ${props => props.theme.foregroundStronger};
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.about .buttons button span {
+.buttons button span {
   margin-right: 16px;
 }
 
-.about .buttons button svg {
+.buttons button svg {
   font-size: 24px;
   color: white;
   margin: 0 16px;
 }
 
-.about .buttons button:hover svg {
+.buttons button:hover svg {
   transform: translateY(-5px);
   transition: all .2s;
 }
 
-.about .buttons button:hover svg.dislike {
+.buttons button:hover svg.dislike {
   transform: translateY(+5px);
   transition: all .2s;
 }
 
 @media (max-width: 1024px) {
-  .about li {
+  li {
     flex-direction: column;
   }
 
-  .about aside {
+  aside {
     padding-left: 0;
     padding-top: 16px;
   }
 }
+`;
+
+export default About;

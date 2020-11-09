@@ -5,7 +5,7 @@ import { MdSyncDisabled, MdStarBorder } from 'react-icons/md'
 import api from '../../services/api'
 import { useAuth, UserData } from '../../hooks/auth'
 import { Container, UserItem, Paginate } from '../../components'
-import './style.css'
+import { UsersList } from './style'
 
 export default function All() {
   const { user } = useAuth();
@@ -60,7 +60,7 @@ export default function All() {
   return (
     <Container loading={false} unstylized className="container-full-width">
 
-      <ul className="users list-flex-row">
+      <UsersList className="users list-flex-row">
         {docs.map((user) => (
           <UserItem key={user.user} user={user} placeholder={loading}>
             <div className='buttons'>
@@ -74,7 +74,7 @@ export default function All() {
             </div>
           </UserItem>
         ))}
-      </ul>
+      </UsersList>
       {!loading &&
         <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
       }

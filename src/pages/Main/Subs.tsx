@@ -5,7 +5,7 @@ import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
 import { Paginate, VideoThumbItem, Container } from '../../components'
 import { VideoData } from './index'
-import './style.css'
+import { VideoList } from './style'
 
 const Subs = () => {
   const { user } = useAuth();
@@ -42,11 +42,11 @@ const Subs = () => {
 
   return (
     <Container loading={false} unstylized className='container-full-width'>
-      <ul className="subs list-flex-column">
+      <VideoList className="subs list-flex-column">
         {docs.map((item) => (
           <VideoThumbItem key={item._id} video={item} placeholder={loading} />
         ))}
-      </ul>
+      </VideoList>
       {!loading &&
         <Paginate page={page} totalItems={total} itemsPerPage={itemsPerPage} handlePaginate={setPage} />
       }

@@ -1,3 +1,7 @@
+import { createGlobalStyle } from 'styled-components'
+import { ThemeType } from '../hooks/index'
+
+export default createGlobalStyle<{ theme: ThemeType }>`
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +14,7 @@ html, body, #root {
 }
 
 body {
-  background: #27242f;
+  background: ${props => props.theme.background};
 }
 
 body, input, button {
@@ -72,12 +76,12 @@ main {
 
 .wrap-tabs-inline .react-tabs__tab {
   background: inherit;
-  color: #999;
+  color: ${props => props.theme.primaryStronger};
   border-radius: 0;
   border: 0;
 }
 
 .wrap-tabs-inline .react-tabs__tab--selected {
-  color: #FFF;
-  border-bottom: 2px solid #9373d8;
-}
+  color: ${props => props.theme.primaryStrong};
+  border-bottom: 2px solid ${props => props.theme.primaryStrong};
+}`;

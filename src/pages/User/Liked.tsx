@@ -5,7 +5,7 @@ import { MdStarBorder } from 'react-icons/md'
 import api from '../../services/api'
 import { useAuth, UserData } from '../../hooks/auth'
 import { Container, UserItem } from '../../components'
-import './style.css'
+import { UsersList } from './style'
 
 export default function Main() {
   const { user } = useAuth();
@@ -43,7 +43,7 @@ export default function Main() {
 
   return (
     <Container loading={false} unstylized className="container-full-width">
-      <ul className="users list-flex-row">
+      <UsersList className="users list-flex-row">
         {docs.map((user) => (
           <UserItem key={user.user} user={user} placeholder={loading}>
             <div className='buttons single'>
@@ -53,7 +53,7 @@ export default function Main() {
             </div>
           </UserItem>
         ))}
-      </ul>
+      </UsersList>
     </Container>
   )
 }

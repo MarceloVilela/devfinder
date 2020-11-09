@@ -6,8 +6,8 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
-import { Header, Container } from '../../components'
-import './style.css'
+import { Header, Container, Footer } from '../../components'
+import About from './style'
 
 export interface ChannelData {
   tags: string[];
@@ -147,7 +147,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
         {
           '_id' in channel && (
             <>
-              <ul className="about">
+              <About>
                 <li key={channel._id}>
                   <div className="avatar">
                     <img
@@ -167,6 +167,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
                     <div>
                       <strong>Sobre</strong>
                       <p>{channel.description}</p>
+                      <p>{/*JSON.stringify(theme)*/}</p>
 
                       <div className='buttons'>
                         {(!includedInDislike && !includedInLike) &&
@@ -180,7 +181,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
                             </button>
                           </>
                         }
-                        
+
                         {includedInDislike &&
                           <button type='button' onClick={() => handleUndoDislike()}>
                             <MdSyncDisabled className="dislike" /><span>Desmarcar</span>
@@ -216,11 +217,13 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
                     </div>
                   </aside>
                 </li>
-              </ul>
+              </About>
             </>
           )
         }
       </Container>
+
+      <Footer />
     </>
   )
 }

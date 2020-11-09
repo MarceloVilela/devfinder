@@ -6,9 +6,9 @@ import 'react-tabs/style/react-tabs.css';
 
 import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
-import { Header, Container, ChannelItem } from '../../components'
+import { Header, Container, Footer, ChannelItem } from '../../components'
 import { ChannelData } from '../ChannelDetail'
-import './style.css'
+import { ChannelContainer } from './style';
 
 interface ChannelsGroupedByCategory {
   [key: string]: ChannelData[];
@@ -80,10 +80,9 @@ export default function Channel() {
       <Header />
 
       <Container loading={false}>
-        <div className='channel-container'>
+        <ChannelContainer>
 
           <section>
-            {tabIndex}
             <select onChange={(e) => setTabIndex(Number(e.target.value))}>
               {categories.map((name, key) => (
                 <option key={key} value={key}>{name}</option>
@@ -111,8 +110,10 @@ export default function Channel() {
               ))}
             </Tabs>
           </section>
-        </div>
+        </ChannelContainer>
       </Container>
+
+      <Footer />
     </>
   )
 }

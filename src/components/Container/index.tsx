@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import indicator from '../../assets/load.gif';
 
-import './style.css';
+import { Main } from './style';
 
 interface ContainerProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children, loading, className, unstylized }) => {
   return (
-    <main className={`${unstylized ? '' : 'container'} ${className}`}>
+    <Main className={`${unstylized ? '' : 'container'} ${className}`}>
       {loading
         ? (
           <article className='loading-wrapper'>
@@ -26,7 +26,7 @@ const Container: React.FC<ContainerProps> = ({ children, loading, className, uns
           children
         )
       }
-    </main>
+    </Main>
   );
 }
 

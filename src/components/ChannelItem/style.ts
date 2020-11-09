@@ -1,69 +1,52 @@
-.channels {
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template-columns: repeat(1, 1fr);
-}
+import styled from 'styled-components'
 
-@media (min-width: 768px) {
-  .channels {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .channels {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.channels li .avatar {
+export const ChannelThumb = styled.li`
+.avatar {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.channels .avatar img {
+.avatar img {
   width: 64px;
   border-radius: 32px;
 }
 
-.channels aside {
+aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
   justify-content: center;
-  /*background-color: #3d3451;
-    border: 1px solid #3d3451;*/
   padding: 15px 20px;
   text-align: left;
   border-radius: 0 0 5px 5px;
 }
 
-.channels aside strong {
+aside strong {
   font-size: 16px;
-  color: #eee;
+  color: ${props => props.theme.foregroundStronger};
 }
 
-.channels aside small {
+aside small {
   font-size: 14px;
-  color: #c1bec7;
+  color: ${props => props.theme.foregoundStrong};
   margin-top: 5px;
   line-height: 20px;
   height: 40px;
   overflow: hidden;
 }
 
-.channels li.placeholder .avatar {
+&.placeholder .avatar {
   width: 64px;
   height: 64px;
   border-radius: 32px;
   background: #ccc;
 }
 
-.channels li.placeholder aside p {
+&.placeholder aside p {
   height: 16px;
   margin-bottom: 3px;
   border-radius: 6px;
   background: #ccc;
-}
+}`;

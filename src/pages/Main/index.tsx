@@ -3,10 +3,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
 import { useAuth } from '../../hooks/auth';
-import { Header, Container } from '../../components'
+import { Footer, Header } from '../../components'
 import Subs from './Subs';
 import Trend from './Trend';
-import './style.css'
+import { ContainerFullWidth } from './style'
 
 export interface VideoData {
   _id: string;
@@ -27,7 +27,7 @@ export default function Main() {
     <>
       <Header />
 
-      <Container loading={false} className='container-full-width'>
+      <ContainerFullWidth loading={false}>
         <Tabs className='wrap-tabs-inline'>
           <TabList>
             <Tab>Explorar</Tab>
@@ -48,7 +48,9 @@ export default function Main() {
             </TabPanel>
           }
         </Tabs>
-      </Container>
+      </ContainerFullWidth>
+
+      <Footer />
     </>
   )
 }

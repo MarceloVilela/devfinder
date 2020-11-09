@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaYoutube, FaGithub, FaSignOutAlt, FaHome } from 'react-icons/fa';
 
-import './style.css'
+import { Wrapper } from './style'
 
 export default function Header() {
   return (
-    <header>
+    <Wrapper>
       <section>
         <Link to={`/main`}>
           <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
@@ -34,6 +34,6 @@ export default function Header() {
           </Link>
         </nav>
       </section>
-    </header>
+    </Wrapper>
   )
 }

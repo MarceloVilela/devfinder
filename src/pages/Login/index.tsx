@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/auth';
-import './style.css'
+import { LoginContainer } from './style'
 
 interface LoginProps {
   history: {
@@ -50,7 +50,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
   }, [message])
 
   return (
-    <div className='login-container'>
+    <LoginContainer>
       <form>
         <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
 
@@ -58,7 +58,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
 
         <a href={process.env.REACT_APP_API_URL + '/auth/github'} className="login-social-github">Acessar com Github</a>
       </form>
-    </div>
+    </LoginContainer>
   )
 }
 

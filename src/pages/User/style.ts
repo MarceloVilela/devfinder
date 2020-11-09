@@ -1,55 +1,57 @@
-.users {
+import styled from 'styled-components';
+
+export const UsersList = styled.ul`
   display: grid;
   grid-gap: 48px;
   grid-template-columns: repeat(1, 1fr);
-}
 
 @media (min-width: 768px) {
-    .users {
+    & {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 992px) {
-    .users {
+    & {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 /*
 @media (min-width: 600px) {
-    .users {
+    {
         grid-gap: 16px;;
         grid-template-columns: repeat(3, 1fr); 
     }
 
-    .users .avatar img {
+    .avatar img {
         max-width: 100%;
         width: 100%;
         border-radius: 5px 5px 0 0;
     }
 }
 */
+`;
 
-.users li {
+/*
+li {
     border: 1px solid #685394;
     border-radius: 10px;
 }
 
-.users .avatar {
+.avatar {
   display: flex;
-  /*flex: 3;*/
   justify-content: center;
   align-items: center;
 }
 
-.users .avatar img {
+.avatar img {
     max-width: 100%;
     width: 96px;
     border-radius: 5px 5px 0 0;
 }
 
-.users footer {
+footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -62,12 +64,12 @@
 
 }
 
-.users footer strong {
+footer strong {
     font-size: 16px;
     color: #eee;
 }
 
-.users footer small {
+footer small {
     display: block;
     line-height: 20px;
     height: 80px;
@@ -78,14 +80,14 @@
     margin-top: 5px;
 }
 
-.users .buttons {
+.buttons {
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
 
-.users .buttons button {
+.buttons button {
     height: 50px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
     border: 0;
@@ -94,17 +96,17 @@
     cursor: pointer;
 }
 
-.users .buttons button svg {
+.buttons button svg {
     font-size: 24px;
     color: #FFF;
 }
 
-.users .buttons button:hover svg {
+.buttons button:hover svg {
     transform: translateY(-5px);
     transition: all .2s;
 }
 
-.users .buttons button:hover svg.dislike {
+.buttons button:hover svg.dislike {
   transform: translateY(+5px);
   transition: all .2s;
 }
@@ -116,17 +118,18 @@
     margin-top: 300px;
 }
 
-.users .buttons.single {
+.buttons.single {
     grid-template-columns: repeat(1, 1fr);
 }
 
-.users .buttons.single button {
+.buttons.single button {
     color: #FFF;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.users .buttons.single button  svg{
+.buttons.single button  svg{
     margin-right: 10px;
 }
+*/

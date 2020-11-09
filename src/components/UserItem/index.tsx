@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { UserData } from '../../hooks/auth'
-import './style.css';
+import { UserThumb } from './style';
 
 interface UserItemProps {
   user: UserData;
@@ -13,7 +13,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
     <>
       {!placeholder
         ? (
-          <li>
+          <UserThumb>
             <div className="avatar">
               <img src={user.avatar} alt={user.name} />
             </div>
@@ -28,9 +28,9 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
 
             </footer>
 
-          </li>
+          </UserThumb>
         ) : (
-          <li className="placeholder">
+          <UserThumb className="placeholder">
             <div className="avatar">
               <div></div>
             </div>
@@ -45,7 +45,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
 
             </footer>
 
-          </li>
+          </UserThumb>
         )}
     </>
 

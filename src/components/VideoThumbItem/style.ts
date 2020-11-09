@@ -1,19 +1,22 @@
-.subs li {
+import styled from 'styled-components';
+
+export const Thumb = styled.li`
+& {
   /*border: 1px solid #666;*/
   border-radius: 10px;
 }
 
-.subs .thumb {
+.thumb {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.subs .thumb img {
+.thumb img {
   width: 100%;
 }
 
-.subs footer {
+footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,40 +25,40 @@
   text-align: left;
 }
 
-.subs .avatar img {
+.avatar img {
   width: 40px;
   height: 40px;
   border-radius: 20px;
   margin-right: 0.5rem;
 }
 
-.subs footer strong {
+footer strong {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 16px;
   line-height: 16px;
   max-height: 32px;
   overflow: hidden;
-  color: #eee;
+  color: ${props => props.theme.foregroundStronger};
 }
 
-.subs footer small {
+footer small {
   display: block;
   overflow: hidden;
   font-size: 14px;
   line-height: 14px;
   max-height: 28px;
   overflow: hidden;
-  color: #c1bec7;
+  color: ${props => props.theme.foregoundStrong};
 }
 
-.subs .placeholder .thumb {
+&.placeholder .thumb {
   background: #ccc;
   width: 100%;
   height: 174px;
 }
 
-.subs .placeholder .avatar {
+&.placeholder .avatar {
   width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -64,16 +67,16 @@
   background: #ccc;
 }
 
-.subs .placeholder .bio {
+&.placeholder .bio {
   display: flex;
   flex: 1;
   flex-direction: column;
 }
 
-.subs .placeholder footer p {
+&.placeholder footer p {
   height: 16px;
   margin-bottom: 3px;
   border-radius: 6px;
 
   background: #ccc;
-}
+}`;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ChannelData } from '../../pages/ChannelDetail'
-import './style.css';
+import { ChannelThumb } from './style';
 
 interface ItemProps {
   item: ChannelData;
@@ -13,7 +13,7 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
     <>
       {!placeholder
         ? (
-          <li>
+          <ChannelThumb>
             <div className="avatar">
               <a
                 href={item.link}
@@ -31,9 +31,9 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
               <strong>{item.name}</strong>
               <small>{item.tags.join(", ")}</small>
             </aside>
-          </li>
+          </ChannelThumb>
         ) : (
-          <li className="placeholder">
+          <ChannelThumb className="placeholder">
             <div className="avatar">
             </div>
 
@@ -41,7 +41,7 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
               <p></p>
               <p></p>
             </aside>
-          </li>
+          </ChannelThumb>
         )}
     </>
 

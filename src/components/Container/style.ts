@@ -1,4 +1,7 @@
-main.container {
+import styled from 'styled-components';
+
+export const Main = styled.main`
+&.container {
   max-width: 980px;
   margin: 0 auto;
   padding: 50px 0;
@@ -6,10 +9,12 @@ main.container {
 
   /* header fixed */
   padding-top: 100px;
+
+  min-height: 94.8vh;
 }
 
 @media screen and (max-width: 1024px) {
-  main.container { 
+  &.container { 
     max-width: 100%;
     width: 100%;
     padding: 32px 16px;
@@ -29,14 +34,14 @@ main.container {
   }
 }
 
-main > article.loading-wrapper {
+& > article.loading-wrapper {
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-main > article.loading-wrapper img {
+& > article.loading-wrapper img {
   width: 64px;
   height: 64px;
-}
+}`;
