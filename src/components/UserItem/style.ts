@@ -14,12 +14,11 @@ export const UserThumb = styled.li`
 }
 
 .avatar img {
-    max-width: 100%;
-    width: 96px;
-    border-radius: 5px 5px 0 0;
+    width: 48px;
+    border-radius: 24px;
 }
 
-footer {
+aside {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -34,15 +33,19 @@ footer {
 
 }
 
-footer strong {
+aside header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+aside strong {
     font-size: 16px;
     color: ${props => props.theme.foregroundStronger};
 }
 
-footer small {
+aside small {
     display: block;
-    line-height: 20px;
-    height: 80px;
     overflow: hidden;
     
     font-size: 14px;
@@ -51,14 +54,13 @@ footer small {
 }
 
 .buttons {
-    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
 
 .buttons button {
-    height: 50px;
+    padding: 8px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
     border: 0;
     border-radius: 4px;
@@ -67,7 +69,7 @@ footer small {
 }
 
 .buttons button svg {
-    font-size: 24px;
+    font-size: 16px;
     color: #FFF;
 }
 
@@ -105,17 +107,15 @@ footer small {
 
 &.placeholder .avatar div {
     background: #ccc;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
 }
 
-&.placeholder footer {
-    height: 200px;
-}
-
-&.placeholder footer p {
+&.placeholder aside p {
+    flex: 1;
     height: 16px;
-    margin-bottom: 3px;
+    margin-bottom: 8px;
     border-radius: 6px;
     background: #ccc;
 }`;

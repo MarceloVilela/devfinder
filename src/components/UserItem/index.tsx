@@ -18,15 +18,17 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
               <img src={user.avatar} alt={user.name} />
             </div>
 
-            <footer>
+            <aside>
               <div className='bio'>
-                <strong>{user.name}</strong>
+
+                <header>
+                  <strong>{user.name}</strong>
+                  {children}
+                </header>
+
                 <small>{user.bio}</small>
               </div>
-
-              {children}
-
-            </footer>
+            </aside>
 
           </UserThumb>
         ) : (
@@ -35,15 +37,16 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
               <div></div>
             </div>
 
-            <footer>
+            <aside>
               <div className='bio'>
-                <p></p>
+
+                <header>
+                  <p></p>
+                </header>
+
                 <p></p>
               </div>
-
-              {children}
-
-            </footer>
+            </aside>
 
           </UserThumb>
         )}
