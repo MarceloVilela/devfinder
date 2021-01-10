@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+//import { toast } from 'react-toastify'
 
 import api from '../../services/api'
 import { useAuth } from '../../hooks/auth';
@@ -32,7 +32,7 @@ const Subs = () => {
         setTotal(data.total);
         setItemsPerPage(data.itemsPerPage);
       } catch (error) {
-        toast.error('Erro ao listar feed')
+        //toast.error('Erro ao listar feed')
       } finally {
         setLoading(false)
       }

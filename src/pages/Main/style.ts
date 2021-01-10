@@ -11,8 +11,9 @@ export const ContainerFullWidth = styled(Container)`
       padding-right: 0;
     }
 
-    .container-edge-spacing {
-      padding: 1rem;
+    .container-edge-spacing, .react-tabs__tab-list {
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
 `;
@@ -21,6 +22,10 @@ export const VideoList = styled.ul`
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: repeat(1, 1fr);
+
+  .bio {
+    flex: 1;
+  }
 
   @media (min-width: 600px) {
     & {

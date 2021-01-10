@@ -10,9 +10,9 @@ import ChannelDetail from './pages/ChannelDetail'
 export default function Routes() {
   return (
     <BrowserRouter>
-      <Route path='/' exact component={Login} />
+      <Route path='/login' component={Login} />
 
-      <Route path='/main' component={Main} />
+      <Route path='/' component={Main} exact />
 
       <Route path='/user' component={User} />
 

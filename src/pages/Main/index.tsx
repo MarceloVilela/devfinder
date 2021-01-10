@@ -27,7 +27,7 @@ export default function Main() {
     <>
       <Header />
 
-      <ContainerFullWidth loading={false}>
+      <ContainerFullWidth className="container-full-width" loading={false}>
         <Tabs className='wrap-tabs-inline'>
           <TabList>
             <Tab>Explorar</Tab>

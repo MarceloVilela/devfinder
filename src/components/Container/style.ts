@@ -22,6 +22,10 @@ export const Main = styled.main`
     padding-top: 100px; 
   }
 
+  &.container-full-width { 
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   .break-row {
     /*border: 1px solid black;*/

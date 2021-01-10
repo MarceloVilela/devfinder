@@ -40,10 +40,6 @@ main {
   text-align: center;
 }
 
-@media (max-width: 1024px) {
-  main { padding: 40px 22px }
-}
-
 .list-flex-row > *, .list-flex-column > * {
   cursor: pointer;
 }

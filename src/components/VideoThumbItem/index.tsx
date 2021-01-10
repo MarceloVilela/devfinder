@@ -14,27 +14,32 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
       {!placeholder
         ? (
           <Thumb>
-            <div className="thumb">
-              <img
-                src={video.thumbnail}
-                alt={video.title}
-              />
-            </div>
-
-            <footer className='container-edge-spacing'>
-              <div className='avatar'>
+            <a
+              href={video.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="thumb">
                 <img
                   src={video.thumbnail}
                   alt={video.title}
                 />
               </div>
 
-              <div className='bio'>
-                <strong>{video.title}</strong>
-                <small>{video.channel}</small>
-              </div>
-            </footer>
+              <footer className='container-edge-spacing'>
+                <div className='avatar'>
+                  <img
+                    src={video.thumbnail}
+                    alt={video.title}
+                  />
+                </div>
 
+                <div className='bio'>
+                  <strong>{video.title}</strong>
+                  <small>{video.channel}</small>
+                </div>
+              </footer>
+            </a>
           </Thumb>
         )
         : (

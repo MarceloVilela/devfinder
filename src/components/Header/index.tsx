@@ -8,12 +8,12 @@ export default function Header() {
   return (
     <Wrapper>
       <section>
-        <Link to={`/main`}>
+        <Link to={`/`}>
           <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
         </Link>
 
         <nav>
-          <Link to={`/main`}>
+          <Link to={`/`}>
             <FaHome />
             <span>Home</span>
           </Link>
@@ -28,7 +28,7 @@ export default function Header() {
             <span>Canais</span>
           </Link>
 
-          <Link to={`/?logout=1`}>
+          <Link to={`/login?logout=1`}>
             <FaSignOutAlt />
             <span>Sair</span>
           </Link>
