@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 import { LoginContainer } from './style'
 
 interface LoginProps {
@@ -15,20 +16,33 @@ const Login: React.FC<LoginProps> = ({ history }) => {
   const location = useLocation();
   const { user, socialAuthCallback, signOut, message } = useAuth();
 
+  const loadProfile = useCallback(async function(token: string) {
+    try {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      const config = {
+        headers: { authorization: `Bearer ${token}` }
+      };
+
+      const { data: user } = await api.get('/me', config);
+
+      socialAuthCallback({ token, user });
+    } catch (error) {
+      toast.error(`Erro ao listar perfil - ${error.message}`);
+    }
+  }, [socialAuthCallback]);
+
   useEffect(() => {
     signOut();
   }, [signOut])
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const token = queryParams.get('token')
-    //const userId = queryParams.get('id')
-    //const user = { id: userId }
+    const token = queryParams.get('token');
 
     if (typeof token === 'string') {
-      socialAuthCallback({ token })
+      loadProfile(token);
     }
-  }, [location.search, socialAuthCallback])
+  }, [location.search, loadProfile])
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -39,7 +53,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
     }
 
     if (user && Object.keys(user).includes('_id')) {
-      history.push('/main');
+      history.push('/');
     }
   }, [history, user, location.search])
 
@@ -54,7 +68,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
       <form>
         <h1 className="logo">{process.env.REACT_APP_TITLE}</h1>
 
-        <Link to='main' className="login-visitor">Acessar como visitante</Link>
+        <Link to='/' className="login-visitor">Acessar como visitante</Link>
 
         <a href={process.env.REACT_APP_API_URL + '/auth/github'} className="login-social-github">Acessar com Github</a>
       </form>

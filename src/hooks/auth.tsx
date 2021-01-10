@@ -31,7 +31,7 @@ interface ReturnedCode {
 interface AuthContextData {
     user: UserData;
     setUser(user: UserData): void;
-    socialAuthCallback(data: ReturnedCode): void;
+    socialAuthCallback(data: AuthData): void;
     signOut(): void;
     message: {
         content?: string;
@@ -42,7 +42,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [message, setMessage] = useState({})
+    const [message] = useState({})
     const [data, setData] = useState<AuthData>(() => {
         const token = localStorage.getItem('@DevFinder:token');
         const user = localStorage.getItem('@DevFinder:user');
@@ -64,25 +64,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setData({} as AuthData);
     }, [])
 
-    const socialAuthCallback = useCallback(({ token }) => {
+    const socialAuthCallback = useCallback(({ token, user }) => {
         api.defaults.headers.authorization = `Bearer ${token}`;
+        
         localStorage.setItem('@DevFinder:token', token);
+        localStorage.setItem('@DevFinder:user', JSON.stringify(user));
 
-        async function loadProfile() {
-            try {
-                const { data: user } = await api.get('/me')
-
-                localStorage.setItem('@DevFinder:user', JSON.stringify(user));
-
-                setData({
-                    token,
-                    user
-                })
-            } catch (error) {
-                setMessage({ content: 'Erro ao listar perfil - ' + error.message, type: 'error' })
-            }
-        }
-        loadProfile()
+        setData({ token, user });
 
         return;
     }, [setData])
