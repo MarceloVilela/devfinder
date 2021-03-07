@@ -15,14 +15,22 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
         ? (
           <UserThumb>
             <div className="avatar">
-              <img src={user.avatar} alt={user.name} />
+              <a
+                href={`https://github.com/${user.user}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={user.avatar} alt={user.name} />
+              </a>
             </div>
 
             <aside>
               <div className='bio'>
 
                 <header>
-                  <strong>{user.name}</strong>
+                  <a href={`/user/${user.user}`}>
+                    <strong>{user.name}</strong>
+                  </a>
                   {children}
                 </header>
 

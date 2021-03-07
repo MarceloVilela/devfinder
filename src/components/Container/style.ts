@@ -4,13 +4,20 @@ export const Main = styled.main`
 &.container {
   max-width: 980px;
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 10px 0;
   text-align: center;
 
   /* header fixed */
-  padding-top: 100px;
+  padding-top: 60px;
 
   min-height: 94.8vh;
+  min-height: calc(100% - 52px);
+} 
+
+&.container.containerVerticalCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1024px) {

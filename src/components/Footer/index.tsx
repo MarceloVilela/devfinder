@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaYoutube } from 'react-icons/fa';
 import { useStyleSwitcher } from '../../hooks/styleSwitcher';
 
 import { Wrapper } from './style';
@@ -18,6 +18,15 @@ const Footer: React.FC = () => {
           >
             <FaGithub color="#fff" />
             /marcelovilela
+          </a>
+
+          <a
+            href="https://www.youtube.com/channel/UC13UqsEmsJ9Z9w0--ABhxCg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube color="#fff" />
+            /devfinder
           </a>
         </div>
         <div>

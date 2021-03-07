@@ -11,7 +11,7 @@ export const ContainerFullWidth = styled(Container)`
       padding-right: 0;
     }
 
-    .container-edge-spacing, .react-tabs__tab-list {
+    .container-edge-spacing, .react-tabs__tab-list, .paginate {
       padding-left: 16px;
       padding-right: 16px;
     }
@@ -30,6 +30,7 @@ export const VideoList = styled.ul`
   @media (min-width: 600px) {
     & {
       grid-template-columns: repeat(2, 1fr);
+      margin: 0 16px;
     }
   }
 

@@ -4,6 +4,7 @@ export const Thumb = styled.li`
 & {
   /*border: 1px solid #666;*/
   border-radius: 10px;
+  cursor: default;
 }
 
 .thumb {
@@ -49,7 +50,7 @@ footer small {
   line-height: 14px;
   max-height: 28px;
   overflow: hidden;
-  color: ${props => props.theme.foregoundStrong};
+  color: ${props => props.theme.foregroundStrong};
 }
 
 &.placeholder .thumb {

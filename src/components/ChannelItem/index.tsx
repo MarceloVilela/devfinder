@@ -28,7 +28,9 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
             </div>
 
             <aside>
-              <strong>{item.name}</strong>
+              <a href={`/channel/${item.userGithub}`}>
+                <strong>{item.name}</strong>
+              </a>
               <small>{item.tags.join(", ")}</small>
             </aside>
           </ChannelThumb>

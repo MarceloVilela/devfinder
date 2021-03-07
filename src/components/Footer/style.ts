@@ -9,6 +9,10 @@ a, p {
   cursor: pointer;
 }
 
+a + a{
+  margin-left: 16px;
+}
+
 &>div{
   max-width: 980px;
   margin: 0 auto;
@@ -24,6 +28,6 @@ a, p {
     width: 100%;
     padding: 32px 16px;
     /* header fixed */
-    padding-top: 100px; 
+    padding-top: 50px; 
   }
 }`;

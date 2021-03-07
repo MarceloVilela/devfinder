@@ -12,11 +12,11 @@ export const night = {
     /*background*/
     background: '#27242f',
 
-    foreground: '#7d63b6',
+    foreground: '#aaa',
     /*primary-strong*/
-    foregoundStrong: '#c1bec7',
+    foregroundStrong: '#ccc',
     /*primary-stronger*/
-    foregroundStronger: '#FFFFFF',
+    foregroundStronger: '#fff',
 }
 
 export const day = {
@@ -35,7 +35,7 @@ export const day = {
 
     foreground: '#999',
     /*primary-strong*/
-    foregoundStrong: '#555',
+    foregroundStrong: '#555',
     /*primary-stronger*/
-    foregroundStronger: '#999',
+    foregroundStronger: '#333',
 }

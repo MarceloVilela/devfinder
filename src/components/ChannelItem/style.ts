@@ -30,7 +30,7 @@ aside strong {
 
 aside small {
   font-size: 14px;
-  color: ${props => props.theme.foregoundStrong};
+  color: ${props => props.theme.foregroundStrong};
   margin-top: 5px;
   line-height: 20px;
   height: 40px;

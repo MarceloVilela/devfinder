@@ -61,8 +61,8 @@ export default function All() {
     <Container loading={false} unstylized className="container-full-width">
 
       <UsersList className="users list-flex-row">
-        {docs.map((user) => (
-          <UserItem key={user.user} user={user} placeholder={loading}>
+        {docs.map((user, key) => (
+          <UserItem key={key} user={user} placeholder={loading}>
             <div className='buttons'>
               <button type='button' onClick={() => handleDislike(user.user)}>
                 <MdSyncDisabled className="dislike" />

@@ -142,7 +142,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     <>
       <Header />
 
-      <Container loading={loading}>
+      <Container loading={loading} className="containerVerticalCenter">
 
         {
           '_id' in channel && (

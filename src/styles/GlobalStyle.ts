@@ -36,7 +36,7 @@ a svg:hover {
 main {
   max-width: 980px;
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 20px 0;
   text-align: center;
 }
 

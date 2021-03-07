@@ -56,7 +56,7 @@ aside strong {
 aside p {
   font-size: 14px;
   line-height: 20px;
-  color: ${props => props.theme.foregoundStrong};
+  color: ${props => props.theme.foregroundStrong};
   width: 100%;
 }
 

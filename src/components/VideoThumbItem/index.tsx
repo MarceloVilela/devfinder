@@ -9,6 +9,8 @@ interface ItemProps {
 }
 
 const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => {
+  const idYoutubeWatch = video.url ? video.url.split('v=')[1] : '';
+
   return (
     <>
       {!placeholder
@@ -25,21 +27,21 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
                   alt={video.title}
                 />
               </div>
-
-              <footer className='container-edge-spacing'>
-                <div className='avatar'>
-                  <img
-                    src={video.thumbnail}
-                    alt={video.title}
-                  />
-                </div>
-
-                <div className='bio'>
-                  <strong>{video.title}</strong>
-                  <small>{video.channel}</small>
-                </div>
-              </footer>
             </a>
+
+            <footer className='container-edge-spacing'>
+              <div className='avatar'>
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                />
+              </div>
+
+              <div className='bio'>
+              <a href={`/video/${idYoutubeWatch}`}><strong>{video.title}</strong></a>
+                <small>{video.channel}</small>
+              </div>
+            </footer>
           </Thumb>
         )
         : (

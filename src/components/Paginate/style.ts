@@ -10,7 +10,7 @@ export const PaginateList = styled.ul`
 
 li {
     background-color: ${props => props.theme.primaryStronger};
-    padding: 10px 15px;
+    padding: 5px 10px;
     margin-right: 10px;
     cursor: pointer;
     border-radius: 3px;

@@ -31,23 +31,28 @@ const Paginate: React.FC<PaginateProps> = ({ page, totalItems, itemsPerPage, han
     }
   }, [numberedList, page])
 
+  const _handlePaginate = (page: number) => {
+    window.scrollTo(0, 0);
+    handlePaginate(page);
+  }
+
   return (
     <>
       <PaginateList className="paginate">
         {page !== 1 &&
-          <li onClick={() => handlePaginate(1)}>
+          <li onClick={() => _handlePaginate(1)}>
             <FaAngleDoubleLeft className="begin" />
           </li>
         }
         {shortenedList.map(item => (
           <li
             key={item}
-            onClick={() => handlePaginate(item)}
+            onClick={() => _handlePaginate(item)}
             className={`${item === page ? 'selected' : ''}`}
           >{item}</li>
         ))}
         {page !== totalPages &&
-          <li onClick={() => handlePaginate(totalPages)}>
+          <li onClick={() => _handlePaginate(totalPages)}>
             <FaAngleDoubleRight className="end" />
           </li>
         }

@@ -5,6 +5,8 @@ export const UserThumb = styled.li`
     border: 1px solid ${props => props.theme.backgroundWeakerer};
     border: none;
     border-radius: 10px;
+
+    cursor: default !important;
 }
 
 .avatar {
