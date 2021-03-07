@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { FaYoutube, FaHome } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
