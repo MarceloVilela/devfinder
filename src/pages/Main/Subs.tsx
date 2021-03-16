@@ -43,8 +43,8 @@ const Subs = () => {
   return (
     <Container loading={false} unstylized className='container-full-width'>
       <VideoList className="subs list-flex-column">
-        {docs.map((item) => (
-          <VideoThumbItem key={item._id} video={item} placeholder={loading} />
+        {docs.map((item, key) => (
+          <VideoThumbItem key={key} video={item} placeholder={loading} />
         ))}
       </VideoList>
       {!loading &&

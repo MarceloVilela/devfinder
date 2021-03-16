@@ -85,7 +85,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      const { data } = await api.delete(`/channels/${channel.name}/dislikes`);
+      const { data } = await api.delete(`/dislikes/channels/${channel.name}`);
       toast.success(`${channel.name} saiu de: Não seguidos`);
       setUser(data);
     } catch (error) {
@@ -100,7 +100,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      const { data } = await api.delete(`/channels/${channel.name}/likes`)
+      const { data } = await api.delete(`/likes/channels/${channel.name}`)
       toast.success(`${channel.name} saiu de: Favoritos`);
       setUser(data);
     } catch (error) {
@@ -115,7 +115,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      const { data } = await api.post(`/channels/${channel.name}/dislikes`)
+      const { data } = await api.post(`/dislikes/channels/${channel.name}`)
       toast.success(`${channel.name} foi para: Não seguidos`);
       setUser(data);
     } catch (error) {
@@ -130,7 +130,7 @@ const ChannelDetail: React.FC<ChannelDetailProps> = ({ match }) => {
     }
 
     try {
-      const { data } = await api.post(`/channels/${channel.name}/likes`)
+      const { data } = await api.post(`/likes/channels/${channel.name}`)
       toast.success(`${channel.name} foi para: Favoritos`);
       setUser(data);
     } catch (error) {

@@ -19,7 +19,7 @@ export default function Main() {
         setLoading(true)
         setDocs(Array.from(Array(50)).map(item => ({} as UserData)))
 
-        const { data } = await api.get('/devs/dislikes')
+        const { data } = await api.get('/dislikes/devs')
         setDocs(data)
       } catch (error) {
         toast.error('Erro ao listar devs')
@@ -36,7 +36,7 @@ export default function Main() {
       return;
     }
 
-    await api.delete(`/devs/${username}/dislikes`)
+    await api.delete(`/dislikes/devs/${username}`)
     toast.success(`${username} saiu de: Não seguidos`);
     setDocs(docs.filter(user => user.user !== username))
   }
@@ -44,8 +44,8 @@ export default function Main() {
   return (
     <Container loading={false} unstylized className="container-full-width">
       <UsersList className="users list-flex-row">
-        {docs.map((user) => (
-          <UserItem key={user.user} user={user} placeholder={loading}>
+        {docs.map((user, key) => (
+          <UserItem key={key} user={user} placeholder={loading}>
             <div className='buttons single'>
               <button type='button' onClick={() => handleUndoDislike(user.user)}>
                 <MdSyncDisabled />Desmarcar

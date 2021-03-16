@@ -41,7 +41,7 @@ export default function All() {
       return;
     }
 
-    await api.post(`/devs/${username}/dislikes`)
+    await api.post(`/dislikes/devs/${username}`)
     toast.success(`${username} foi para: Não seguidos`);
     setDocs(docs.filter(user => user.user !== username))
   }
@@ -52,7 +52,7 @@ export default function All() {
       return;
     }
 
-    await api.post(`/devs/${username}/likes`)
+    await api.post(`/likes/devs/${username}`)
     toast.success(`${username} foi para: Favoritos`);
     setDocs(docs.filter(user => user.user !== username))
   }
