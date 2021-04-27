@@ -13,7 +13,7 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
     <>
       {!placeholder
         ? (
-          <ChannelThumb>
+          <ChannelThumb className="card">
             <div className="avatar">
               <a
                 href={item.link}
@@ -35,7 +35,7 @@ const ChannelItem: React.FC<ItemProps> = ({ item, placeholder }) => {
             </aside>
           </ChannelThumb>
         ) : (
-          <ChannelThumb className="placeholder">
+          <ChannelThumb className="placeholder card">
             <div className="avatar">
             </div>
 

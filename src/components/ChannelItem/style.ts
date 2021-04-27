@@ -1,6 +1,25 @@
 import styled from 'styled-components'
 
 export const ChannelThumb = styled.li`
+&.card {
+  background: ${props => props.theme.backgroundWeakerer};
+  border-radius: 8px;
+}
+
+&.card .avatar {
+  margin-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  &.card {
+    background: inherit;
+  }
+
+  &.card .avatar {
+    margin-left: 0;
+  }
+}
+
 .avatar {
   display: flex;
   justify-content: center;

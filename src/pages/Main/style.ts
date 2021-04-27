@@ -15,6 +15,10 @@ export const ContainerFullWidth = styled(Container)`
       padding-left: 16px;
       padding-right: 16px;
     }
+
+    .react-tabs__tab-list {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -25,6 +29,24 @@ export const VideoList = styled.ul`
 
   .bio {
     flex: 1;
+  }
+
+  @media (max-width: 599px) {
+    & li.card {
+      background-color: ${props => props.theme.backgroundWeak};
+      padding: 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    & li.card + li.card {
+      margin-bottom: 1rem;
+    }
+
+    li.card .container-edge-spacing {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   @media (min-width: 600px) {

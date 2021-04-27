@@ -9,6 +9,15 @@ export const UserThumb = styled.li`
     cursor: default !important;
 }
 
+&.card {
+    background: ${props => props.theme.backgroundWeak};
+    margin-bottom: 1rem;
+}
+
+&.card .avatar {
+    margin-left: 1rem;
+}
+
 .avatar {
   display: flex;
   justify-content: center;

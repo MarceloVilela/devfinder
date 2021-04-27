@@ -15,7 +15,7 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
     <>
       {!placeholder
         ? (
-          <Thumb>
+          <Thumb className="card">
             <a
               href={video.url}
               target="_blank"
@@ -45,7 +45,7 @@ const VideoThumbItem: React.FC<ItemProps> = ({ video, placeholder = false }) => 
           </Thumb>
         )
         : (
-          <Thumb className="placeholder">
+          <Thumb className="placeholder card">
             <div className="thumb">
             </div>
 

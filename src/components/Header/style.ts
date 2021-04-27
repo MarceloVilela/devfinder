@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.header`
 /* fixed */
 position: fixed;
-margin-top: -22px;
+/*margin-top: -22px;*/
 top: 0;
 width: 100%;
 opacity: 0.95;
@@ -22,7 +22,8 @@ section {
 
 @media (max-width: 1024px) {
   section {
-    padding: 22px 22px 0 22px
+    padding: 22px 22px 0 22px;
+    padding: 1rem 1rem 1rem 1rem;
   }
 }
 

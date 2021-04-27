@@ -27,6 +27,7 @@ export const Main = styled.main`
     padding: 32px 16px;
     /* header fixed */
     padding-top: 100px; 
+    padding-top: 80px;
   }
 
   &.container-full-width { 

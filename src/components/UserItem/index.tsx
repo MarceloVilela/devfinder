@@ -13,7 +13,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
     <>
       {!placeholder
         ? (
-          <UserThumb>
+          <UserThumb className="card">
             <div className="avatar">
               <a
                 href={`https://github.com/${user.user}`}
@@ -40,7 +40,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, placeholder, children }) => {
 
           </UserThumb>
         ) : (
-          <UserThumb className="placeholder">
+          <UserThumb className="placeholder card">
             <div className="avatar">
               <div></div>
             </div>
