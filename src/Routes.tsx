@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Login from './pages/Login'
 
 import Main from './pages/Main'
-import VideoDetail from './pages/VideoDetail'
+import VideoDetail from './pages/VideoDetail/[slug]'
 
 import User from './pages/User'
 import UserDetail from './pages/UserDetail'

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api'
 import { Header, Container, Footer } from '../../components'
 import { VideoData } from '../Main'
-import About from './style'
+import About from './VideoDetailStyle'
 
 interface VideoDetailProps {
   match: {
