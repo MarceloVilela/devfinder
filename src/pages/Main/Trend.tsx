@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import api from '../../services/api'
@@ -6,12 +7,14 @@ import { Paginate, VideoThumbItem, Container } from '../../components'
 import { VideoData } from './index'
 import { VideoList } from './style'
 
+
 const Trend = () => {
   const [loading, setLoading] = useState(false);
   const [docs, setDocs] = useState<VideoData[]>([] as VideoData[])
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
     async function loadDocs() {
@@ -19,7 +22,9 @@ const Trend = () => {
         setLoading(true)
         setDocs(Array.from(Array(30)).map(item => ({} as VideoData)))
 
-        const { data } = await api.get('/feed/trending', { params: { page } })
+        const userIdentifier = new URLSearchParams(location.search).get('user');
+
+        const { data } = await api.get('/feed/trending', { params: { page, user: userIdentifier } })
         setDocs(data.docs)
         setTotal(data.total);
         setItemsPerPage(data.itemsPerPage);
